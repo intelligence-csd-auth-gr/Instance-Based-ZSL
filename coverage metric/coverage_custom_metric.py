@@ -2,7 +2,7 @@
 """
 Created on Mon Jul 20 15:37:56 2020
 
-@author: stam
+@author: 
 
 Implementation of coverage metric for categorical labels
 """
@@ -10,7 +10,13 @@ Implementation of coverage metric for categorical labels
 import numpy as np
 
 def coverage_custom(y_test, y_pred):
-    
+    ''' Input:
+            y_test: vector of ground truth
+            y_pred: vector of predictions
+        
+        Return:
+            Coverage score per instance'''
+            
     k = []
     for y in range(0, len(y_test)):
         
