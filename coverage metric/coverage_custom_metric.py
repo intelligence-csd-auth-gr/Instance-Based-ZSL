@@ -23,7 +23,7 @@ def coverage_custom(y_test, y_pred):
         kk = []
         for i in range(0, len(y_test[y])):
             
-            kk.append( list(y_pred[y]).index(y_test[y][i]) + 1)
+            kk.append( list(y_pred[y]).index(y_test[y][i]) )
         
         k.append(max(kk))
         
@@ -31,30 +31,30 @@ def coverage_custom(y_test, y_pred):
 
 #Example 1
 print(coverage_custom([ ['ball'] , ['music', 'food'] ] , [ ['ball'] , ['music', 'food'] ]) )
-# [1,2]
+# [0,1]
 k = coverage_custom([ ['ball'] , ['music', 'food'] ] , [ ['ball'] , ['music', 'food'] ])
 print(np.round(np.mean(k),3))
-# 1.5
+# 0.5
 
 
 #Example 2
 print(coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['ball', 'music'] , ['music', 'walk', 'run', 'food'] ]) )
-# [2,4]
+# [1,3]
 k = coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['ball', 'music'] , ['music', 'walk', 'run', 'food'] ])
 print(np.round(np.mean(k),3))
-# 3.0
+# 2.0
 
 
 # Perfect match
 print(coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['music', '1'] , ['music', 'food'] ]) )
-# [1,2]
+# [0,1]
 k = coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['music', '1'] , ['music', 'food'] ])
 print(np.round(np.mean(k),3))
-# 1.5
+# 0.5
 
 # Worst case scenario
 print(coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['1','2','3','music'] , ['music', '1','2', 'food'] ]) )
-# [4,4]
+# [3,3]
 k = coverage_custom([ ['music'] , ['food', 'music'] ] , [ ['1','2','3','music'] , ['music', '1','2', 'food'] ])
 print(np.round(np.mean(k),3))
-# 4
+# 3.0
