@@ -1,9 +1,13 @@
 import pickle
+
 def get_abstract_occurence_preds(labels,abstracts):
+
     predictions=list()
+
     for abstract in abstracts:
         flag=True
         string=""
+
         for label in labels:
             if abstract.__contains__(label) \
                     or abstract.__contains__(label.lower()) \
@@ -21,6 +25,7 @@ def get_abstract_occurence_preds(labels,abstracts):
     with open('abstract_occurence_predictions.pickle', 'wb') as f:
         pickle.dump(predictions, f)
     f.close()
+    
     return predictions
 
 file = open("top_100_labels.txt")
