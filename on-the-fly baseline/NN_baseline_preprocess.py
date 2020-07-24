@@ -5,7 +5,8 @@ Created on Wed Jul 15 01:58:05 2020
 @author: stam
 
 Create the appropriate dictionaries per pickle: keys -> instanceX, value: dictionary structure (dictX)
-dictX: keys -> investigated labels, value: i) the abs distance from the bioBERT embedding of each instance's sentence' or ii) the corresponding cosine similarity
+dictX: keys -> investigated labels, value: i) the Manhattan distance or ii) the corresponding cosine similarity
+                                          from the bioBERT embedding of each instance's sentence'
 """
 
 import os, pickle
@@ -22,7 +23,7 @@ with open(z + '.pickle', "rb") as f:
 f.close()
 
 # select between the the manner that distances are takein into consideration between embedding vectors:
-choice = input('Press your choice: \n1. Nearest-Neighbors using absolute distance \n2. Nearest-Neighbor using cosine similarity \n... ')
+choice = int(input('Press your choice: \n1. Nearest-Neighbors using Manhattan distance \n2. Nearest-Neighbor using cosine similarity \n... '))
 
     
 # provide the path with pre-computed sentence embeddings per sentence
@@ -56,11 +57,12 @@ for i in range(0,5): # we have 5 separate pickles, having split them to batches 
                 
                 q = label_embeddings[label]
                 
-                if choice == '1':
+                if choice == 1:
                     
                     d['instance' + str(j)][label].append(np.sum(np.abs(q - sentence_embeddings.iloc[j][k].cpu().numpy())))
                     prefix = 'NN_bioBERT_44k_batch'
-                elif choice == '2':
+                
+                elif choice == 2:
                 
                     d['instance' + str(j)][label].append( torch.cosine_similarity( torch.from_numpy(q), sentence_embeddings.iloc[j][k].cpu(), dim=0).cpu().numpy())
                     prefix = 'torch_NN_bioBERT_44k_batch'

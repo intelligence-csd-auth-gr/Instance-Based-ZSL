@@ -258,6 +258,8 @@ mode = int(input('Which mode do you want to apply:  \n1. All known labels are pr
 
 if mode == 3:
     
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking_shuffled_70percent_plus_noise.pickle'
+    
     with open("noisy_labels_70percent" + ".pickle", "rb") as f:
                 noisy_dict = pickle.load(f)
     f.close()
@@ -284,6 +286,8 @@ if mode == 3:
                 
 elif mode == 2:
             
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking_shuffled_70percent.pickle'
+
     for pos in range(0, len(known_y)):
     
         random.shuffle(known_y[pos])
@@ -291,7 +295,11 @@ elif mode == 2:
             
             known_y[pos] = known_y[pos][0: int(np.ceil(0.7 * len(known_y[pos])))] 
 
-                
+else:
+    
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking.pickle'
+
+               
 
 for n in range(start, end):
     
@@ -391,9 +399,7 @@ for n in range(start, end):
             
 print(os.getcwd())
 
-#with open('label_dependence_results_top100labels_' + scenario + '_mode_' + mode_save + '_adaptive.pickle', 'wb') as handle:
-with open('label_dependence_results_top100labels_' + scenario + '_mode_' + '44kranking_shuffled_70percent_plus_noise.pickle', 'wb') as handle:
-
+with open(arg, 'wb') as handle:
      pickle.dump([decisions, isolated_predictions, positions, rank_info], handle)                
 handle.close()
 
