@@ -2,37 +2,31 @@
 """
 Created on Wed Jul 22 23:49:50 2020
 
-@author: stam
+@author: 
+    
 """
-
-
 import os, pickle
 os.chdir(r'D:\BioASQ\evaluate_py')
 
-z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
 
+z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
 with open(z, "rb") as f:
     			decisions, isolated_predictions, positions, rank_info = pickle.load(f)
 f.close() 
 
 
-
-os.chdir(r'D:\BioASQ\evaluate_py')
 file = open("top_100_labels.txt")
-
 labels=list()
 for line in file:
    labels.append(line[:-1])
 
 
 test_file = "pure_zero_shot_test_set_top100.txt"
-
 y = []
 file = open(test_file)
 for line in file:
     y.append(line[2:-2].split("labels: #")[1])
 print(len(y))
-
 
 new_y = []
 known_y = []
@@ -52,7 +46,7 @@ for label_y in y:
     known_y.append(string_known[:-1].split('#'))
     
 k = []    
-for i in range(0, 44938):
+for i in range(0, len(known_y)):
     if len(known_y[i]) > 3:
         k.append(list(set(known_y[i]) - set(decisions[i][0])))
     else:
@@ -67,17 +61,17 @@ for _ in k:
     if c % 100 == 0:
         all_k = list(set(all_k))
         
-all_k.remove('') # is uncommented on 44k case
+all_k.remove('') 
 
 del c,f,file,flag, isolated_predictions,j,k,label, positions, rank_info, string, string_known, test_file, y, z
 
+#%%
 import pandas as pd
 pd.DataFrame(all_k).to_csv('70_percent_of_known.csv')    
 
 
 xx = pd.read_csv('known_y_labels.csv')
 xx = xx.iloc[1:,1] #remove index and ''
-
 xx = xx.to_list()
 
 diff = list(set(xx) - set(all_k))
@@ -235,8 +229,10 @@ class BiobertEmbedding(object):
 biobert = BiobertEmbedding()
 #%%
 import random
+
 counter = 0
 d = {}
+
 for label in all_k:
     
     d[label] = {}
@@ -269,3 +265,4 @@ with open('noisy_labels_70percent.pickle', 'wb') as handle:
      pickle.dump(d, handle)                
 handle.close()
     
+print('**Adding noisy labels intead of the rejected ones***')
