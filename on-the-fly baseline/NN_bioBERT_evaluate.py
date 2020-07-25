@@ -118,6 +118,8 @@ print(os.getcwd())
 zz = 'occurence_label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
 #zz = 'occurence_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle'
 #zz = 'occurence_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
+
+zz = 'occurence_modified_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
 with open(zz, "rb") as f:
     				label_dependence = pickle.load(f)
 f.close()

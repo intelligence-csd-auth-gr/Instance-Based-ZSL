@@ -48,7 +48,7 @@ f.close()
 which = zz
 yy = label_dependence
 
-
+all_pos = []
 for i in range(0, len(y_occ)):
     if i in where:
         continue
@@ -65,12 +65,35 @@ for i in range(0, len(y_occ)):
         for _ in how:
             #c += 1       
             yy[i].remove(labels[_])
-            yy[i].insert(0, labels[_])
+            put = 0
+            #if pos[_] > 50:
+            #    put = 1
+            #elif pos[_] > 40:
+            #    put = 19
+            #elif pos[_] > 30:
+            #    put = 14
+            #elif pos[_] > 20:
+            #    put = 4
+            #elif pos[_] > 10:
+            #    put = 1
+            #elif pos[_] > 5:
+            #    put = 2
+            #elif pos[_] > 3:
+            #    put = 1
+            #else:
+            #    put = 0
+                
+            yy[i].insert(put, labels[_])
     
           
+    for i in pos:
+        all_pos.append(i)
 print(os.getcwd())
 
-with open('occurence_' + zz, 'wb') as handle:
+#pd.DataFrame(all_pos.hist(bins = 50) #provides the ranking of the labels that were found by occurence
+
+#%%
+with open('occurence_modified_' + zz, 'wb') as handle:
      pickle.dump(yy, handle)                
 handle.close()
 
