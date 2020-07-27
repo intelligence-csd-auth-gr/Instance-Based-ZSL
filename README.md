@@ -12,8 +12,12 @@ link: https://mc03.manuscriptcentral.com/scis
 
 ### Source data
 
-- abstracts from MeSH 2020 with top100 labels appeared.7z --> contains 5 .txt files (split by 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top100 most frequent novel labels into this version appears.
-- frequency_novel_labels_test_set_MeSH2020.csv  --> the names of all the novel labels in this version, along with their frequencies of appearence into the test set.
+- **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split by 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top100 most frequent novel labels into this version appears.
+- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of all the novel labels in this version, along with their frequencies of appearence into the test set.
+
+### Pre-process stages
+
+- **obtain_text_embeddings.py** 🠊 this file computes the embeddings of the input text files and saves them into corresponding pickles with the bioBERT embeddings.
 
 
 ## Process:
