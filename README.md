@@ -20,7 +20,7 @@ link: https://mc03.manuscriptcentral.com/scis
 Here are added some files for accelerating the execution of several needed computations:
 
 
-- **label_embeddings.pcikle** 🠊 a dictionary structure whose: *keys* are the names of the top100 most frequent novel labels, *values* their bioBERT embedding vector stored as a Numpy array (768,)
+- **label_embeddings_top100.pcikle** 🠊 a dictionary structure whose: *keys* are the names of the top100 most frequent novel labels, *values* their bioBERT embedding vector stored as a Numpy array (768,)
 
 - **known_labels_embeddings.pickle'** 🠊 a dictionary structure whose: *keys* are the names of all the known labels into the examined test set, *values* their bioBERT embedding vector stored as a Numpy array (768,)
 
@@ -31,15 +31,24 @@ Here are added some files for accelerating the execution of several needed compu
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenario, *values* a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
 
 
-
-
 ### Pre-process stages
+
+We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance.
+
 
 - **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,)
 
 - **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 1.58 GB and 213 MB, respectively.
 
 
+### on-the-fly baseline
+
+- **NN_baseline proprocess.py** 🠊 Create the appropriate pickle files per examined input pickle (batch) where each instance corresponds to one dictionary structure: 
+                                   keys -> instanceX, value: dictionary structure (dictX)
+                            dictX: keys -> investigated labels, value: i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB)
+                                   from the bioBERT embedding of each instance's sentence
+                            
+                            
 ## Process:
 
  - run NN_baseline_preprocess.py 
