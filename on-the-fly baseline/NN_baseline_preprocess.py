@@ -2,7 +2,7 @@
 """
 Created on Wed Jul 15 01:58:05 2020
 
-@author: stam
+@author: 
 
 Create the appropriate dictionaries per pickle: keys -> instanceX, value: dictionary structure (dictX)
 dictX: keys -> investigated labels, value: i) the Manhattan distance or ii) the corresponding cosine similarity
@@ -13,11 +13,11 @@ import os, pickle
 import numpy as np
 import torch
 
-path = r'D:\BioASQ\evaluate_py'
+path = ... #define the path for pre-omputed files  
 os.chdir(path)
 
 # load embeddings of the investigated labels (pre-compued process)
-z = 'top_100_labels_embeddings'
+z = 'label_embeddings_top100'
 with open(z + '.pickle', "rb") as f:
             label_embeddings = pickle.load(f)
 f.close()
@@ -26,8 +26,8 @@ f.close()
 choice = int(input('Press your choice: \n1. Nearest-Neighbors using Manhattan distance \n2. Nearest-Neighbor using cosine similarity \n... '))
 
     
-# provide the path with pre-computed sentence embeddings per sentence
-name = r'D:\44k pickles\pure_Zeroshot_test_set_'
+# provide the full path (look the example) with pre-computed sentence embeddings per sentence  e.g. r'D:\44k pickles\pure_Zeroshot_test_set_'
+name = ...
 
 for i in range(0,5): # we have 5 separate pickles, having split them to batches of 10,000 instances
 
