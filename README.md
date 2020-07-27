@@ -22,9 +22,9 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **label_embeddings.pcikle** 🠊 a dictionary structure whose: *keys* are the names of the top100 most frequent novel labels, *values* their bioBERT embedding vector stored as a Numpy array (768,)
 
-- **'known_labels_embeddings.pickle'** 🠊 a dictionary structure whose: *keys* are the names of all the known labels into the examined test set, *values* their bioBERT embedding vector stored as a Numpy array (768,)
+- **known_labels_embeddings.pickle'** 🠊 a dictionary structure whose: *keys* are the names of all the known labels into the examined test set, *values* their bioBERT embedding vector stored as a Numpy array (768,)
 
-- **"known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them 
+- **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them 
 
 - **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage fot the whole test size into a list structure, where each item is into the next format: 'label_1#label_2#...#label_r'
 
