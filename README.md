@@ -23,7 +23,7 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage fot the whole test size into a list structure, where each item is into the next format: 'label_1#label_2#...#label_r'
 
-- **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenrio, **values** a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
+- **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenario, *values* a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
 
 
 ### Pre-process stages
