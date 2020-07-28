@@ -2,18 +2,18 @@
 
 ## Semi-automatic indexing method for BioASQ task through on-the-fly ZSL method.
 
-This repository constitutes an implementation of the submitted papaer wuth the above title by our research team.
-It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the BioASQ challenge.
+This repository constitutes an implementation of the submitted paper to the Science China Information Science ([SCIS](https://www.springer.com/journal/11432)) journal with the above title by our research team.
+It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the coresponding [BioASQ challenge](http://bioasq.org) regarding the Biomedical indexing.
 
-Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several GB (a permanent link might be provided). 
+Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several of GBs (a permanent link might be provided). 
 
 link: https://mc03.manuscriptcentral.com/scis
 
 
-### Source data
+### source data 
 
 - **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split per 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top100 most frequent novel labels appears into its label space. (*input text files*)
-- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of all the novel labels in this version, along with their frequencies of appearence into the test set.
+- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of all the novel labels in this version, along with the frequency of appearence per each one into the examined test set.
 
 ### pre-computed files
 
@@ -31,7 +31,7 @@ Here are added some files for accelerating the execution of several needed compu
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenario, *values* a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
 
 
-### Pre-process stages
+### pre-process stages
 
 We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance.
 
@@ -43,9 +43,10 @@ We describe the necessary files that need to be executed for producing the offic
 
 ### on-the-fly baseline
 
-- **NN_baseline proprocess.py** 🠊 Create the appropriate pickle files per examined input pickle (batch) where each instance corresponds to one dictionary structure: 
-                                   keys -> instanceX, value: dictionary structure (dictX)
-                            dictX: keys -> investigated labels, value: i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB)
+- **NN_baseline proprocess.py** 🠊 Create the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure: 
+                                   
+                                   - keys -> instanceX, value: dictionary structure (dictX)
+                                   - dictX: keys -> investigated labels, value: i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB)
                                    from the bioBERT embedding of each instance's sentence
                             
                             
