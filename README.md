@@ -26,7 +26,9 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them 
 
-- **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage fot the whole test size into a list structure, where each item is into the next format: 'label_1#label_2#...#label_r'
+- **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item is into the next format: 'label_1#label_2#...#label_r'
+
+- **abstract_occurence_predictions** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item contains a list with the predictions
 
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenario, *values* a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
 
@@ -55,8 +57,15 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the Coverage and 1-error metrics, as well as plots and provided some information about the achieved rankings
 
+### ONZSL
 
-                            
+- **record_label_similaritiy_scores.py** 🠊 this files examines the known label vector of each given abstract (implementing 3 different assumptions: i) all known labels, ii) 70% of the known labels, iii) 70% of the known labels along with some noisy labels are provided) and exports a .pickle which contains for each examined instance a pandas DataFrame with the relative similarities of the investigated novel labels and the existing ones, respectively
+
+- **compute_weights_per_instance.py** 🠊 this script exploits the pickles with the pre-computed similarities and obtains the stores the max similarity score per instance for every examined label, as the Equation 2 of the original paper presents
+
+- **weighted_unweighted_approaches.py** 🠊 we combine the the label dependencies through the similarities that are stored previously either along with the weights from the above file (weighted version) or without (unweighted version) for implementing the RankScore of Equation 3 into the original work
+
+- **occurence.py** this script computes the last step of the proposed algorithm, examining if the label names are detected into each abstract segment, otherwise it returns None. Its produced file is found in the pre-comouted folder (predictions_label_occurence.pickle)
                             
 ## Process:
 
