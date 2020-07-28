@@ -32,15 +32,17 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **novel_labels_actual.pickle** 🠊 the actual novel labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them
 
+- **top_100_labels.txt** 🠊 the top100 most frequent novel labels into .txt format
+
 
 ### pre-process stages
 
 We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance.
 
 
-- **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,)
+- **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,) (total size: 1.58 GB)
 
-- **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 1.58 GB and 213 MB, respectively.
+- **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 6.75 GB and 213 MB, respectively.
 
 
 ### on-the-fly baseline
