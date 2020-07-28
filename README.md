@@ -36,6 +36,8 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **top_100_labels.txt** 🠊 the top100 most frequent novel labels into .txt format
 
+- **known_y_labels.csv** 🠊 the known labels of the whole examined set into a .csv format
+
 
 ### pre-process stages
 
@@ -44,7 +46,9 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,) (total size: 1.58 GB)
 
-- **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 6.75 GB and 213 MB, respectively.
+- **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 6.75 GB and 213 MB, respectively
+
+- **add_noisy_labels.py** 🠊 the process under which the noisy_labels_70percent.pickle file is produced
 
 
 ### on-the-fly baseline
@@ -65,14 +69,43 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **weighted_unweighted_approaches.py** 🠊 we combine the the label dependencies through the similarities that are stored previously either along with the weights from the above file (weighted version) or without (unweighted version) for implementing the RankScore of Equation 3 into the original work
 
-- **occurence.py** this script computes the last step of the proposed algorithm, examining if the label names are detected into each abstract segment, otherwise it returns None. Its produced file is found in the pre-comouted folder (predictions_label_occurence.pickle)
+- **occurence.py** 🠊 this script computes the last step of the proposed algorithm, examining if the label names are detected into each abstract segment, otherwise it returns None. Its produced file is found in the pre-comouted folder (predictions_label_occurence.pickle)
+
+- **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into one proper .pickle file per time 
+
+- **ONZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work
                             
 ## Process:
 
- - run NN_baseline_preprocess.py 
+(To do)
+
+
+## Requirements/Dependencies
+
+Our code has been tested on Windows10 using python 3.7.6. The mentioned time responses correspond to a working station embedded with Intel Core i7-9700 (3GHz) processor and 32 GB RAM. The next libaries are necessary:
+
+- Numpy
+- bioBERT
+- Spacy
+- Pandas
+- Seaborn and Matplotlib (for graphing)
+
+
+## Developed by: 
+
+|           Name  (English/Greek)            |      e-mail          |
+| -------------------------------------------| ---------------------|
+| Nikolaos Mylonas    (Νικόλαος Μυλωνάς)     | myloniko@csd.auth.gr |
+| Stamatis Karlos     (Σταμάτης Κάρλος)      | stkarlos@csd.auth.gr |
+| Grigorios Tsoumakas (Γρηγόριος Τσουμάκας)  | greg@csd.auth.gr     |
+
+## Funded by
+
+The research work was supported by the Hellenic Foundation forResearch and Innovation (H.F.R.I.) under the “First Call for H.F.R.I.Research Projects to support Faculty members and Researchers and the procurement of high-cost research equipment grant” (ProjectNumber: 514).
+
+## Additional resources
+
+- [AMULET project](https://www.linkedin.com/showcase/amulet-project/about/)
+- [Academic Team's page](https://intelligence.csd.auth.gr/#)
  
- Input: path, 'top_100_labels_embeddings.pickle', 44k pickles folder with 5 pickles (~2GB)
- 
- - run record_label_similaritiy_scores.py -> produce pickle (1.5 GB) with dataframes for eq1
- 
- Input: path, top_100_labels.txt, pure_zero_shot_test_set_top100.txt, noisy_labels_70percent.pickle
+ ![amulet-logo](https://user-images.githubusercontent.com/6009931/87019683-9204ad00-c1db-11ea-9394-855d1d3b41b3.png)
