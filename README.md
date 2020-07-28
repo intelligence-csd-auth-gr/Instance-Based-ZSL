@@ -43,9 +43,9 @@ We describe the necessary files that need to be executed for producing the offic
 
 ### on-the-fly baseline
 
-- **NN_baseline proprocess.py** 🠊 Create the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure: 
-1. keys -> instanceX, value: dictionary structure (dictX)
-2. dictX: keys -> investigated labels, value: i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB) from the bioBERT embedding of each instance's sentence
+- **NN_baseline proprocess.py** 🠊 Create the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure (dictA): 
+* dictA: keys -> instanceX, value: dictionary structure (dictX)
+* dictX: keys -> investigated labels, value: i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB) from the bioBERT embedding of each instance's sentence
                             
                             
 ## Process:
