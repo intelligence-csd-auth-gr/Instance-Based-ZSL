@@ -6,7 +6,9 @@ Created on Wed Jul 22 23:49:50 2020
     
 """
 import os, pickle
-os.chdir(r'D:\BioASQ\evaluate_py')
+
+path = ... #define the path for pre-computed files  
+os.chdir(path)
 
 
 z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
@@ -65,20 +67,17 @@ all_k.remove('')
 
 del c,f,file,flag, isolated_predictions,j,k,label, positions, rank_info, string, string_known, test_file, y, z
 
-#%%
+#%% manipulate properly the known labels and the randomly selected subset of it 
 import pandas as pd
-pd.DataFrame(all_k).to_csv('70_percent_of_known.csv')    
+pd.DataFrame(all_k).to_csv('70_percent_of_known_labels.csv')    
 
+x = pd.read_csv('known_y_labels.csv')
+x = x.iloc[1:,1] #remove index and ''
+x = x.to_list()
 
-xx = pd.read_csv('known_y_labels.csv')
-xx = xx.iloc[1:,1] #remove index and ''
-xx = xx.to_list()
-
-diff = list(set(xx) - set(all_k))
+diff = list(set(x) - set(all_k))
 #%%
 
-from scipy.spatial import distance
-import tensorflow as tf
 from biobert_embedding import downloader
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM    
 import torch
