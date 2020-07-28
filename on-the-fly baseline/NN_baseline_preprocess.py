@@ -4,16 +4,13 @@ Created on Wed Jul 15 01:58:05 2020
 
 @author: 
 
-Create the appropriate dictionaries per pickle: keys -> instanceX, value: dictionary structure (dictX)
-dictX: keys -> investigated labels, value: i) the Manhattan distance or ii) the corresponding cosine similarity
-                                          from the bioBERT embedding of each instance's sentence'
 """
 
 import os, pickle
 import numpy as np
 import torch
 
-path = ... #define the path for pre-omputed files  
+path = ... #define the path for pre-computed files  
 os.chdir(path)
 
 # load embeddings of the investigated labels (pre-compued process)
