@@ -30,6 +30,8 @@ Here are added some files for accelerating the execution of several needed compu
 
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose: *keys* the known labels that are replaced during the imperfect oracle scenario, *values* a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level
 
+- **novel_labels_actual.pickle** 🠊 the actual novel labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them
+
 
 ### pre-process stages
 
@@ -43,9 +45,15 @@ We describe the necessary files that need to be executed for producing the offic
 
 ### on-the-fly baseline
 
-- **NN_baseline proprocess.py** 🠊 Create the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure (dictA): 
+- **NN_baseline proprocess.py** 🠊 this script creates the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure (dictA): 
 * dictA: keys -> instanceX (e.g. 'instance0'), value: another dictionary structure (dictX)
 * dictX: keys -> investigated labels (top100 labels e.g. 'Flexural Strength'), value: a list with i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB) from the bioBERT embedding of each instance's sentence and the specific label (length of list is equal to  **p** which depends on sentence's length)
+
+- **NN_summary.py** 🠊 given the path with the .pickles created by the above script, we concatenate the necessary information (decisions, best 3 scores) into a common .pickle per different distance function for the whole examined test set. The 'best 3 scores' values are not exploited further into this work
+
+- **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the Coverage and 1-error metrics, as well as plots and provided some information about the achieved rankings
+
+
                             
                             
 ## Process:
