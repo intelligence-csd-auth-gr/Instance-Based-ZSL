@@ -82,7 +82,7 @@ We describe the necessary files that need to be executed for producing the offic
 
 ## Requirements/Dependencies
 
-Our code has been tested on Windows10 using python 3.7.6. The mentioned time responses correspond to a working station embedded with Intel Core i7-9700 (3GHz) processor and 32 GB RAM. The next libaries are necessary:
+Our code has been tested on Windows10 using python 3.7.6. The next libaries are necessary:
 
 - Numpy
 - bioBERT
