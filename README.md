@@ -1,4 +1,4 @@
-# AMULET_SCIS
+# ONline Zero-Shot-Learning (ONZSL)
 
 ## Semi-automatic indexing method for BioASQ task through on-the-fly ZSL method.
 
@@ -6,8 +6,6 @@ This repository constitutes an implementation of the submitted paper to the Scie
 It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the coresponding [BioASQ challenge](http://bioasq.org) regarding the Biomedical indexing.
 
 Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several of GBs (a permanent link might be provided). 
-
-link: https://mc03.manuscriptcentral.com/scis
 
 
 ### source data 
@@ -75,10 +73,6 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **ONZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work
                             
-## Process:
-
-(To do)
-
 
 ## Requirements/Dependencies
 
