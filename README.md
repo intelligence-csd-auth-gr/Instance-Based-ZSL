@@ -2,7 +2,7 @@
 
 ## Semi-automatic indexing method for BioASQ task through on-the-fly ZSL method.
 
-This repository constitutes an implementation of the submitted paper to the Science China Information Science ([SCIS](https://www.springer.com/journal/11432)) journal with the above title by our research team.
+This repository constitutes an implementation of the submitted paper to the Pattern Recognition Letters ([PRLetters](https://www.journals.elsevier.com/pattern-recognition-letters)) journal with the above title by our research team.
 It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the coresponding [BioASQ challenge](http://bioasq.org) regarding the Biomedical indexing.
 
 Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several of GBs (a permanent link might be provided). 
