@@ -19,6 +19,7 @@ Some brief documentation is provided here for running all the necessary steps, s
 
 Here are added some files for accelerating the execution of several needed computations:
 
+- **dict_top100_labels_similarities.pickle** 🠊 a dictionary structure whose: *keys* are the names of the top100 most frequent novel labels, *values* their Cosine similarity score with all of the known labels, so as to avoid computing such scores per instance by making simple searches
 
 - **label_embeddings_top100.pcikle** 🠊 a dictionary structure whose: *keys* are the names of the top100 most frequent novel labels, *values* their bioBERT embedding vector stored as a Numpy array (768,)
 
