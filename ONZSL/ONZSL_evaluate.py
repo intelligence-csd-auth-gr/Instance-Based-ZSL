@@ -87,7 +87,7 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     
 #%%  you have to load the files that implement the necessary algorithms (ranking of labels per instance)
 
-# we plot the corresponding histograms as well as the COverage and 1-error metric as well as the frequency of the correct predictions on the pre-defined bins: 
+# we plot the corresponding histograms as well as the Coverage and 1-error metric as well as the frequency of the correct predictions on the pre-defined bins: 
 
 #Approach: ONZSL(max)
 # Coverage error:        8.961 
@@ -99,7 +99,7 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
 #[30, 50)      2298
 #[50, 100)     2692
 
-path = ... # give the path of the appropriate folder into 'Results': perfect oracle - imperfect oracle 
+path = ... # give the path of the appropriate folder into 'Results': ideal oracle - imperfect oracle 
 os.chdir(path)
 
 files = os.listdir(os.getcwd())
