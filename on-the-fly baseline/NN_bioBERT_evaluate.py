@@ -2,7 +2,10 @@
 """
 Created on Wed Jul 15 10:44:38 2020
 
-@author: stam
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
@@ -13,7 +16,7 @@ import pandas as pd
 def bring_new_y(current_path):
     
     
-    path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'  #define the path for pre-computed files  
+    path = ...  #define the path for pre-computed files  
     os.chdir(path)
     
     with open('novel_labels_actual.pickle', 'rb') as handle:
@@ -64,7 +67,7 @@ def one_rank_custom(y_test, y_pred):
 
 def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     
-    path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'  #define the path for pre-computed files  
+    path = ... #define the path for pre-computed files  
     os.chdir(path)
     
     with open('known_labels.pickle', 'rb') as handle:
@@ -81,8 +84,9 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     
     os.chdir(current_path)
     return y_test_new, y_preds_new
-    
+###################################################################################    
 #%%  you have to load the summarization files
+
 path = r'D:\NN_bioBERT_summary_files'
 os.chdir(path)
 files = os.listdir(os.getcwd())
@@ -117,32 +121,16 @@ for pos,f in enumerate(files):
         out.value_counts()
 
 
-#%%
+#%% examine the performance of the NN-bioBERT algorithms proposed by Chang et al. (reference 27) 
     
 os.chdir(r'D:\BioASQ\evaluate_py')
 print(os.getcwd())
-#zz = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_official.pickle'
+
+#zz = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle'
 zz = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
 
 with open(zz, "rb") as f:
-    				label_dependence = pickle.load(f)
-f.close()
-
-which = zz
-NN_bioBERT_44k_decisions = label_dependence
-
-#%%
-
-os.chdir(r'D:\BioASQ\evaluate_py')
-
-print(os.getcwd())
-zz = 'occurence_label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
-#zz = 'occurence_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle'
-#zz = 'occurence_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
-
-zz = 'occurence_modified_label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
-with open(zz, "rb") as f:
-    				label_dependence = pickle.load(f)
+    	label_dependence = pickle.load(f)
 f.close()
 
 which = zz

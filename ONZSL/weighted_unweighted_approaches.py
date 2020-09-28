@@ -2,7 +2,10 @@
 """
 Created on Thu Jul 16 14:50:46 2020
 
-@author: stam
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle

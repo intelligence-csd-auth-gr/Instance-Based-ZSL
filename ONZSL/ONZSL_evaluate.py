@@ -2,7 +2,10 @@
 """
 Created on Wed Jul 15 10:44:38 2020
 
-@author: 
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
@@ -97,7 +100,7 @@ for pos,f in enumerate(files):
     files = os.listdir(os.getcwd())
 
     with open(f, "rb") as f:
-        				label_dependence = pickle.load(f)
+        	label_dependence = pickle.load(f)
     f.close()
     
     NN_bioBERT_44k_decisions = label_dependence

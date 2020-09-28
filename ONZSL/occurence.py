@@ -1,7 +1,5 @@
 import os, pickle
 
-os.chdir(r'D:\BioASQ\evaluate_py')
-
 def get_abstract_occurence_preds(labels,abstracts):
 
     predictions=list()
@@ -30,6 +28,7 @@ def get_abstract_occurence_preds(labels,abstracts):
     
     return predictions
 
+#####################################################################################
 path = ... #define the path for pre-computed files  
 os.chdir(path)
 

@@ -2,7 +2,10 @@
 """
 Created on Mon Jul 20 10:22:48 2020
 
-@author: 
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import pandas as pd
@@ -72,7 +75,7 @@ which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_official.
 which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
 ###############################################################################
 with open(which, "rb") as f:
-    				label_dependence = pickle.load(f)
+    	label_dependence = pickle.load(f)
 f.close()
 
 

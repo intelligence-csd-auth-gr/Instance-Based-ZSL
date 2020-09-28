@@ -210,6 +210,7 @@ _ = 'dict_top100_labels_similarities'
 with open(_ + ".pickle", "rb") as f:
                 dict_top100 = pickle.load(f)
 f.close()
+
 #%% Decide for: 
 #1. saving intermediate pickles per 5k instances 
 #2. save the necessary dataframes for all the test set or for specific instances (correction mode - not applicable here)

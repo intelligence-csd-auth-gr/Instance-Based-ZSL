@@ -2,8 +2,10 @@
 """
 Created on Wed Jul 15 01:58:05 2020
 
-@author: 
-
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
@@ -41,7 +43,7 @@ for i in range(0,5): # we have 5 separate pickles, having split them to batches 
             print(j)
         d['instance' + str(j)] = {}
         
-        #Initialize empy lists per label for every examined instance
+        #Initialize empty lists per label for every examined instance
         for label in label_embeddings.keys():
             d['instance' + str(j)][label] = []
             
@@ -64,6 +66,7 @@ for i in range(0,5): # we have 5 separate pickles, having split them to batches 
                     d['instance' + str(j)][label].append( torch.cosine_similarity( torch.from_numpy(q), sentence_embeddings.iloc[j][k].cpu(), dim=0).cpu().numpy())
                     prefix = 'torch_NN_bioBERT_44k_batch'
                 
+    
     # for every input batch, another one output batch is computed, holding the appropriate distances into them                
     with open(prefix + str(i) + '.pickle', 'wb') as handle:
         pickle.dump(d, handle)                
