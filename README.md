@@ -60,7 +60,7 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **NN_summary.py** 🠊 given the path with the .pickles created by the above script, we concatenate the necessary information (decisions, best 3 scores) into a common .pickle per different distance function for the whole examined test set. The 'best 3 scores' values are not exploited further into this work
 
-- **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the Coverage and 1-error metrics, as well as plots and provided some information about the achieved rankings
+- **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the Coverage and 1-error metrics, as well as produces appropriate histograms plots and additional information about the achieved rankings
 
 ### ONZSL
 
@@ -74,8 +74,16 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into one proper .pickle file per time 
 
-- **ONZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work
+- **ONZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work. Additional histograms and frequency of correct predictions are computed through this script, which are not recorded into the manuscript due to lack of space
                             
+### Results
+
+Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
+
+- **ideal oracle** and **imperfect oracle** 🠊 exploited under the **ONZSL_evaluate.py**
+- **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py**
+
+
 
 ## Requirements/Dependencies
 
