@@ -10,8 +10,8 @@ Some brief documentation is provided here for running all the necessary steps, s
 
 ### source data 
 
-- **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split per 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top100 most frequent novel labels appears into its label space. (*input text files*)
-- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of the top-100 most frequent novel labels in this version of BioASQ dataset, along with the frequency of appearence per each one into the examined test set.
+- **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split per 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top-100 most frequent novel labels appears into its label space
+- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of the top-100 most frequent novel labels in this version of BioASQ dataset, along with the frequency of appearence per each one into the examined test set
 
 - **pure_zero_shot_test_set_top100.7z** 🠊 it actually contains all the examined test abstracts into one .txt file 
 
@@ -41,21 +41,21 @@ Here are added some files for accelerating the execution of several needed compu
 
 ### pre-process stages
 
-We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance.
+We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance
 
 
 - **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,) (total size: 1.58 GB)
 
 - **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the top-100 most frequent novel labels (choice == 1) or the existing known labels per instance (choice == 2). The produced 5 .pickles per case are equal in total to 6.75 GB and 213 MB, respectively
 
-- **add_noisy_labels.py** 🠊 the process under which the noisy_labels_70percent.pickle file is produced
+- **add_noisy_labels.py** 🠊 the process under which the **noisy_labels_70percent.pickle** file is produced
 
 
 ### on-the-fly baseline
 
 - **NN_baseline proprocess.py** 🠊 this script creates the appropriate .pickle files per examined input .pickle (batch) where each instance corresponds to one dictionary structure (dictA): 
-* dictA: keys -> instanceX (e.g. 'instance0'), value: another dictionary structure (dictX)
-* dictX: keys -> investigated labels (top100 labels e.g. 'Flexural Strength'), value: a list with i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity (~2.3 GB) from the bioBERT embedding of each instance's sentence and the specific label (length of list is equal to  **p** which depends on sentence's length)
+  * dictA: keys -> instanceX (e.g. 'instance0'), value: another dictionary structure (dictX)
+  * dictX: keys -> investigated labels (top100 labels e.g. 'Flexural Strength'), value: a list with i) the Manhattan distance (~1.5GB) or ii) the corresponding cosine similarity   (~2.3 GB) from the bioBERT embedding of each instance's sentence and the specific label (length of list is equal to  **p** which depends on sentence's length)
 
 - **NN_summary.py** 🠊 given the path with the .pickles created by the above script, we concatenate the necessary information (decisions, best 3 scores) into a common .pickle per different distance function for the whole examined test set. The 'best 3 scores' values are not exploited further into this work
 
