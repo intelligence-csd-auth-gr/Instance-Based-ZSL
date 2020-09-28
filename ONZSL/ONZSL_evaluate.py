@@ -86,11 +86,23 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     return y_test_new, y_preds_new
     
 #%%  you have to load the files that implement the necessary algorithms (ranking of labels per instance)
-path = r'D:\BioASQ\evaluate_py\ONZSL evaluations\imperfect oracle'
+
+# we plot the corresponding histograms as well as the COverage and 1-error metric as well as the frequency of the correct predictions on the pre-defined bins: 
+
+#Approach: ONZSL(max)
+# Coverage error:        8.961 
+# One-error:             0.620 
+#[0, 1)       16225
+#[1, 3)       11505
+#[3, 10)       8032
+#[10, 30)      4183
+#[30, 50)      2298
+#[50, 100)     2692
+
+path = ... # give the path of the appropriate folder into 'Results': perfect oracle - imperfect oracle 
 os.chdir(path)
 
 files = os.listdir(os.getcwd())
-#print(files)
 
 approach = ['LSSc(max)', 'w-LSSc(max)', 'ONZSL(max)', 'ONZSL(sum)' ]
 makeplot = True
