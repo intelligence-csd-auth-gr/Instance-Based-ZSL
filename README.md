@@ -81,7 +81,7 @@ We describe the necessary files that need to be executed for producing the offic
 Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
 
 - **ideal oracle** and **imperfect oracle** 🠊 exploited under the **ONZSL_evaluate.py**
-- **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py**
+- **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the contained .7z file)
 
 
 
