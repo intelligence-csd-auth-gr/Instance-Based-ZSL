@@ -11,7 +11,9 @@ Some brief documentation is provided here for running all the necessary steps, s
 ### source data 
 
 - **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split per 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top100 most frequent novel labels appears into its label space. (*input text files*)
-- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of all the novel labels in this version, along with the frequency of appearence per each one into the examined test set.
+- **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of the top-100 most frequent novel labels in this version of BioASQ dataset, along with the frequency of appearence per each one into the examined test set.
+
+- **pure_zero_shot_test_set_top100.7z** 🠊 it actually contains all the examined test abstracts into one .txt file 
 
 ### pre-computed files
 
