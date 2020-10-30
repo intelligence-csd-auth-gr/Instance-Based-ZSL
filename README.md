@@ -1,4 +1,4 @@
-# ONline Zero-Shot-Learning (ONZSL)
+# Instance-Based Zero-Shot-Learning (IBZSL)
 
 ## Semi-automatic indexing method for BioASQ task through on-the-fly ZSL method.
 
@@ -42,7 +42,7 @@ Here are added some files for accelerating the execution of several needed compu
 
 ### pre-process stages
 
-We describe the necessary files that need to be executed for producing the official results of the proposed ONZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance
+We describe the necessary files that need to be executed for producing the official results of the proposed IBZSL algorithm. These steps concern the full examined test set, while the proposed algorithm can be applied to each one arrived test instance
 
 
 - **obtain_text_embeddings.py** 🠊 this script computes the embeddings of the *input text files* and saves them into corresponding pickles with the bioBERT embeddings at a sentence-level. The context of each pickle is a Series object, whose each item is a list with **p** Numpy arrays of dimension (768,) (total size: 1.58 GB)
@@ -62,7 +62,7 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the Coverage and 1-error metrics, as well as produces appropriate histograms plots and additional information about the achieved rankings
 
-### ONZSL
+### IBZSL
 
 - **record_label_similaritiy_scores.py** 🠊 this files examines the known label vector of each given abstract (implementing 3 different assumptions: i) all known labels, ii) 70% of the known labels, iii) 70% of the known labels along with some noisy labels are provided) and exports a .pickle which contains for each examined instance a pandas DataFrame with the relative similarities of the investigated novel labels and the existing ones, respectively
 
@@ -74,13 +74,13 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into one proper .pickle file per time 
 
-- **ONZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work. Additional histograms and frequency of correct predictions are computed through this script, which are not recorded into the manuscript due to lack of space
+- **IBZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work. Additional histograms and frequency of correct predictions are computed through this script, which are not recorded into the manuscript due to lack of space
                             
 ### Results
 
 Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
 
-- **ideal oracle** and **imperfect oracle** 🠊 exploited under the **ONZSL_evaluate.py**
+- **ideal oracle** and **imperfect oracle** 🠊 exploited under the **IBZSL_evaluate.py**
 - **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the contained .7z file)
 
 
@@ -100,9 +100,9 @@ Our code has been tested on Windows10 using python 3.7.6. The next libaries are 
 
 |           Name  (English/Greek)            |      e-mail          |
 | -------------------------------------------| ---------------------|
-| Nikolaos Mylonas    (Νικόλαος Μυλωνάς)     | myloniko@csd.auth.gr |
 | Stamatis Karlos     (Σταμάτης Κάρλος)      | stkarlos@csd.auth.gr |
-| Grigorios Tsoumakas (Γρηγόριος Τσουμάκας)  | greg@csd.auth.gr     |
+| Nikolaos Mylonas    (Νικόλαος Μυλωνάς)     | myloniko@csd.auth.gr |
+| Grigorios Tsoumakas (Γρηγόριος Τσουμάκας)  |  greg@csd.auth.gr    |
 
 ## Funded by
 
