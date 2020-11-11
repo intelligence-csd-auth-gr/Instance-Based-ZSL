@@ -1,6 +1,6 @@
 # Instance-Based Zero-Shot-Learning (IBZSL)
 
-## Semi-automatic indexing method for BioASQ task through on-the-fly ZSL method.
+## Instance-Based Zero-Shot Learning for Semi-Automatic MeSH Indexing.
 
 This repository constitutes an implementation of the submitted paper to the Pattern Recognition Letters ([PRLetters](https://www.journals.elsevier.com/pattern-recognition-letters)) journal with the above title by our research team.
 It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the coresponding [BioASQ challenge](http://bioasq.org) regarding the Biomedical indexing.
