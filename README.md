@@ -5,6 +5,8 @@
 This repository constitutes an implementation of the submitted paper to the Pattern Recognition Letters ([PRLetters](https://www.journals.elsevier.com/pattern-recognition-letters)) journal with the above title by our research team.
 It has been created for facilitating the reproducubility of the proposed online Zero-shot Learning algorithm, applied on data mined from the MeSH 2020 database, as it is defined by the coresponding [BioASQ challenge](http://bioasq.org) regarding the Biomedical indexing.
 
+![PRLetters_mesh_new_300dpi](https://user-images.githubusercontent.com/6009931/121052638-3e238f00-c7c3-11eb-9aae-367271087215.jpg)
+
 Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several of GBs (a permanent link is going to be provided). 
 
 
