@@ -11,14 +11,14 @@ It has been created for facilitating the reproducubility of the proposed online 
 Some brief documentation is provided here for running all the necessary steps, since uploading all the source file demands several of GBs (a permanent link is going to be provided). 
 
 
-### source data 
+### Source data 
 
 - **abstracts from MeSH 2020 with top100 labels appeared.7z** 🠊 contains 5 .txt files (split per 10,000 instances) which include the abstracts from MeSH 2020 that at least one of the top-100 most frequent novel labels (*frLabel*) appears into its label space.
 - **frequency_novel_labels_test_set_MeSH2020.csv**  🠊 the names of the *frLabel* in the examined version of the BioASQ dataset, along with the frequency of appearence per each one into the examined test set.
 
 - **pure_zero_shot_test_set_top100.7z** 🠊 it actually contains all the examined test abstracts into one *.txt* file.
 
-### pre-computed files
+### Pre-computed files
 
 Here are added some files for accelerating the execution of several needed computations:
 
@@ -26,11 +26,11 @@ Here are added some files for accelerating the execution of several needed compu
  1. *keys*: are the names of the *frLabel* set,
  2. *values*: the Cosine similarity score of the each key with all of the known labels, so as to avoid computing such scores per instance by making simple searches.
 
-- **label_embeddings_top100.pcikle** 🠊 a dictionary structure whose:
+- **label_embeddings_top100.pickle** 🠊 a dictionary structure whose:
  1.*keys*: are the names of the *frLabel* set,
  2.*values*: the bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
-- **known_labels_embeddings.pickle'** 🠊 a dictionary structure whose:
+- **known_labels_embeddings.pickle** 🠊 a dictionary structure whose:
  1. *keys*: are the names of all the known labels into the examined test set, 
  2. *values*: their bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
@@ -84,7 +84,7 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **occurence.py** 🠊 this script computes the last step of the proposed algorithm, examining if the label names are detected into each abstract segment, otherwise it returns None. Its produced file is found in the pre-comouted folder (*predictions_label_occurence.pickle*).
 
-- **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into one proper .pickle file per time .
+- **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into a proper *.pickle* file per time .
 
 - **IBZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work. Additional histograms and frequency of correct predictions are computed through this script, which are not recorded into the manuscript due to lack of space
                             
