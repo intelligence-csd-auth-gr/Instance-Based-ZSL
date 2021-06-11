@@ -7,11 +7,12 @@ Created on Wed Jul 22 23:49:50 2020
 """
 import os, pickle
 
-path = ... #define the path for pre-computed files  
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\imperfect oracle'#... #define the path for pre-computed files  
 os.chdir(path)
 
 
-z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
+#z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
+z = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
 with open(z, "rb") as f:
     			decisions, isolated_predictions, positions, rank_info = pickle.load(f)
 f.close() 

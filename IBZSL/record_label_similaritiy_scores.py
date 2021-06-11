@@ -1,13 +1,13 @@
 import pickle
-from sklearn.metrics import f1_score,hamming_loss
-from sklearn.preprocessing import MultiLabelBinarizer
+#from sklearn.metrics import f1_score,hamming_loss
+#from sklearn.preprocessing import MultiLabelBinarizer
 import numpy as np
 import pandas as pd
 import os
-import copy
+#import copy
 
 
-path = ... #define the path for pre-computed files  
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
 
 choice = int(input('How many labels you want? \n1: 100 labels \n2: user defined labels (add .txt file into source path) \n\n Your choice ...  '))
@@ -53,7 +53,7 @@ del choice, file, test_file, label_y, string, flag, label, path, string_known, l
 
 #%% use the bioBERT library, assigning embeddings computations to GPU 
 
-from scipy.spatial import distance
+#from scipy.spatial import distance
 import tensorflow as tf
 from biobert_embedding import downloader
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM    
@@ -73,6 +73,9 @@ if torch.cuda.is_available():
 
 	print('We will use the GPU:', torch.cuda.get_device_name(0))
 
+else:
+    
+    device = 'cpu'
 
 class BiobertEmbedding(object):
 	"""
@@ -89,6 +92,7 @@ class BiobertEmbedding(object):
 			self.model_path = model_path
 		else:
 			self.model_path = downloader.get_BioBert("google drive")
+
 
 		self.tokens = ""
 		self.sentence_tokens = ""
@@ -252,7 +256,7 @@ batch = -1
 start = 0
 
 
-mode = int(input('Which mode do you want to apply:  \n1. All known labels are provided \n2. 70% of the known labels are provided \n3. 70% of the known labels are provided and noisy labels are added replacing the missing 30%  \n\n Your choice ...  '))
+mode = int(input('Which mode do you want to apply:  \n1. All known labels are provided \n2. 70% of the known labels are provided \n3. 70% of the known labels are provided and noisy labels are added replacing the missing 30%  \n4. MTI predictions (existing state-of-the-art approach) \n\n Your choice ...  '))
 
 if mode == 3:
     
@@ -293,11 +297,25 @@ elif mode == 2:
             
             known_y[pos] = known_y[pos][0: int(np.ceil(0.7 * len(known_y[pos])))] 
 
-else:
+elif mode == 1:
     
     arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking.pickle'
 
                
+elif mode == 4:
+    
+        arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'MTI_ranking.pickle'
+        
+        z = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI\mti_predictions.pickle'
+
+        with open(z, "rb") as f:
+            			y_mti = pickle.load(f)
+        f.close()
+        
+        known_y = y_mti
+    
+else:
+    exit('Wrong input')
 
 for n in range(start, end):
     
