@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 11 11:29:52 2021
-
-@author: stam
-"""
-
 import pickle
 import numpy as np
 import pandas as pd
@@ -160,10 +153,10 @@ class BiobertEmbedding(object):
 		logger.info("Shape of Sentence Embeddings = %s",str(len(sentence_embedding)))
 		return sentence_embedding
 
-## call the above class
+
 biobert = BiobertEmbedding()
 
-#%%
+#%% define the appropriate defs
 
 
 def label_embeddings(asked_labels):
@@ -200,10 +193,7 @@ def label_pair(novel_labels_embeddings, existing_labels_embeddings):
     return d
 
                   
-
-
-
-
+#%% main code
 
 path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
@@ -217,7 +207,7 @@ if choice == 1:
         novel_labels.append(line[:-1])
 
 else:
-    exit('Needs user input')
+    raise SystemExit('Needs user input')
     
 
 choice = int(input('Compute similarities of each novel label with: \n1: actual labels \n2: MTI predictions \n\n Your choice ...  '))
@@ -271,6 +261,10 @@ handle.close()
 with open('dict_similarities_novel_' + to_save + '.pickle', 'wb') as handle:
     pickle.dump(d, handle)                
 handle.close()
+
+#%% a typical example
+
 #actual_emb = novel_labels_embeddings['Non-Smokers']
 #label_array = novel_labels_embeddings['Nutrients']
 #dist = torch.cosine_similarity(actual_emb, label_array, dim=0)
+#print(dist)
