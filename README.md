@@ -22,11 +22,15 @@ Some brief documentation is provided here for running all the necessary steps, s
 
 Here are added some files for accelerating the execution of several needed computations:
 
-- **dict_top100_labels_similarities.pickle** 🠊 a dictionary structure whose: 
+- **dict_similarities_novel_known_labels.pickle** 🠊 a dictionary structure whose: 
  1. *keys*: are the names of the *frLabel* set,
- 2. *values*: the Cosine similarity score of the each key with all of the known labels, so as to avoid computing such scores per instance by making simple searches.
+ 2. *values*: the Cosine similarity score of the each key with all of the actual known labels, so as to avoid computing such scores per instance by making simple searches.
 
-- **label_embeddings_top100.pickle** 🠊 a dictionary structure whose:
+- **dict_similarities_novel_MTI_labels.pickle** 🠊 a dictionary structure whose: 
+ 1. *keys*: are the names of the *frLabel* set,
+ 2. *values*: the Cosine similarity score of the each key with all of the predicted existing labels based on the MTI tool, so as to avoid computing such scores per instance by making simple searches.
+
+- **novel_labels_embeddings.pickle** 🠊 a dictionary structure whose:
  1.*keys*: are the names of the *frLabel* set,
  2.*values*: the bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
@@ -39,7 +43,7 @@ Here are added some files for accelerating the execution of several needed compu
 ```
 [ ['Fluorodeoxyglucose F18', 'Glycolysis', 'Humans', 'Lymphoma, Extranodal NK-T-Cell', 'Positron Emission Tomography Computed Tomography','Positron-Emission         Tomography','Prognosis','Radiopharmaceuticals','Retrospective Studies','Survival Analysis','Tumor Burden'],
   ['Bacillus subtilis','China','Fermentation','Glucosidases','Peptide Hydrolases','RNA, Ribosomal, 16S','Soy Foods'],
-  ['Catheter Ablation','Delivery, Obstetric','Female','Fetofetal Transfusion','Gestational Age','Humans','Infant, Newborn','Pregnancy','Pregnancy Outcome','Pregnancy Reduction, Multifetal','Pregnancy, Twin','Retrospective Studies','Treatment Outcome','Twins, Monozygotic'], ...]
+  ['Catheter Ablation','Delivery, Obstetric','Female','Fetofetal Transfusion','Gestational Age','Humans','Infant, Newborn','Pregnancy','Pregnancy Outcome','Pregnancy Reduction, Multifetal','Pregnancy, Twin','Retrospective Studies','Treatment Outcome','Twins, Monozygotic'] ]
 ```
 
 - **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item is into the next format: 
@@ -55,7 +59,13 @@ Here are added some files for accelerating the execution of several needed compu
  1. *keys*: the known labels that are replaced during the imperfect oracle scenario, 
  2. *values*: a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level.
 
-- **novel_labels_actual.pickle** 🠊 the actual novel labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them.
+- **novel_labels_actual.pickle** 🠊 the actual novel labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them. We depict here the first 3 items of this list:
+
+```
+[['Progression-Free Survival'],
+ ['Fermented Foods and Beverages'],
+ ['Radiofrequency Ablation']]
+ ```
 
 - **top_100_labels.txt** 🠊 the *frLabel* set into *.txt* format.
 
