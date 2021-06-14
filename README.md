@@ -104,22 +104,22 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **record_label_similaritiy_scores.py** 🠊 this files examines the known label vector of each given abstract (implementing 3 different assumptions: i) all known labels, ii) 70% of the known labels, iii) 70% of the known labels along with some noisy labels are provided) and exports a *.pickle* file which contains for each examined instance a *Pandas DataFrame* with the relative similarities of the investigated novel labels and the existing ones, respectively.
 
-- **compute_weights_per_instance.py** 🠊 this script exploits the pickles with the pre-computed similarities and obtains the stored *max similarity score* per instance for every examined label, as the *Equation 6* of the original paper presents.
+- **compute_weights_per_instance.py** 🠊 this script exploits the pickles with the pre-computed similarities and obtains the stored *max similarity score* per instance for every examined label, according to the *Equation 6* of the original paper.
 
-- **weighted_unweighted_approaches.py** 🠊 we combine the the label dependencies through the similarities that are stored previously either along with the weights from the above file (weighted version) or without (unweighted version) for implementing the RankScore of Equation 3 into the original work.
+- **weighted_unweighted_approaches.py** 🠊 we combine the label dependencies through the similarities that are stored previously either along with the weights from the above file (weighted version) or without (unweighted version) for implementing the RankScore of Equation 3 into the original work.
 
 - **occurence.py** 🠊 this script computes the last step of the proposed algorithm, examining if the label names are detected into each abstract segment, otherwise it returns None. Its produced file is found in the pre-comouted folder (*predictions_label_occurence.pickle*).
 
-- **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into a proper *.pickle* file per time .
+- **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into a proper *.pickle* file per time.
 
-- **IBZSL_evaluate.py** 🠊 the script through which the Coverage and 1-error metric are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, as they are recorded into the original work. Additional histograms and frequency of correct predictions are computed through this script, which are not recorded into the manuscript due to lack of space
+- **IBZSL_evaluate.py** 🠊 the script through which the *Coverage* and the *1-error* metrics are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, since these computations are computed into their corresponding files. Additionally, appropriate histograms and useful stats (frequency of correct predictions) are computed here, which are not recorded into the manuscript due to lack of space.
                             
 ### Results
 
 Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
 
 - **ideal oracle** and **imperfect oracle** 🠊 exploited under the **IBZSL_evaluate.py**
-- **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the contained .7z file)
+- **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the existing *.7z* files)
 
 
 
