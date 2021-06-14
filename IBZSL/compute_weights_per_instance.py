@@ -29,7 +29,7 @@ def exploit_sent_emb(choice, x):
         return
     
     
-path = ... #define the path for pre-computed files  
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files' #define the path for pre-computed files  
 os.chdir(path)
     
 file = open("top_100_labels.txt")
@@ -37,7 +37,7 @@ labels = list()
 for line in file:
    labels.append(line[:-1])
 
-path = ... #define the path for .pickles obtained by the 'calculate_similarities.py'
+path = r'D:\AMULET_mesh2020\44k' #... #define the path for .pickles obtained by the 'calculate_similarities.py'
 os.chdir(path)
 
 choice = input('what kind of sentence embeddings exploitation do you prefer? 1: max 2: max3 3: average 4: max2  5: all but min and max ...') # we use the first choice
@@ -56,6 +56,10 @@ for j in files:
     with open(j, "rb") as f:
         				x = pickle.load(f)
     f.close()
+    
+    #with gzip.open(j,"rb") as f:
+    #    x = pickle.load(f)
+    #f.close()
 
     for _ in labels:
         for i in x.keys():    

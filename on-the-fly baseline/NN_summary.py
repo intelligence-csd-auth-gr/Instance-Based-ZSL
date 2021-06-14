@@ -44,7 +44,7 @@ def sort_similarities(d, labels):
             s = sorted(range(len(k)), key=lambda pos: k[pos])
             s.reverse()
             decisions.append(np.array(labels)[s])
-            best_3_scores.append(np.array(k)[s][0:3])  # hold the 3 best values for profiling reasons, it is not used in SCIS pipeline. 
+            best_3_scores.append(np.array(k)[s][0:3])  # hold the 3 best values for profiling reasons, it is not used into the proposed pipeline. 
 
     return decisions, best_3_scores
 

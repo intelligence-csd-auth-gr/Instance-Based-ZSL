@@ -15,18 +15,18 @@ import torch
 path = ... #define the path for pre-computed files  
 os.chdir(path)
 
-# load embeddings of the investigated labels (pre-compued process)
+# load embeddings of the investigated labels (pre-computed process)
 z = 'label_embeddings_top100'
 with open(z + '.pickle', "rb") as f:
             label_embeddings = pickle.load(f)
 f.close()
 
-# select between the the manner that distances are takein into consideration between embedding vectors:
+# select between the manner that distances are taken into consideration between embedding vectors:
 choice = int(input('Press your choice: \n1. Nearest-Neighbors using Manhattan distance \n2. Nearest-Neighbor using cosine similarity \n... '))
 
     
 # provide the full path (look the example) with pre-computed sentence embeddings per sentence  e.g. r'D:\44k pickles\pure_Zeroshot_test_set_'
-name = ...
+name = ... #pure_Zeroshot_test_set_
 
 for i in range(0,5): # we have 5 separate pickles, having split them to batches of 10,000 instances
 

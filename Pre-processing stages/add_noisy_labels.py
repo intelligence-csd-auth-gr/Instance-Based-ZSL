@@ -1,15 +1,18 @@
 import os, pickle
 
 path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\imperfect oracle'#... #define the path for pre-computed files  
+path = r'D:\datasets\mode2'
 os.chdir(path)
 
 
-#z = 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle'
-z = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
+z = 'label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent.pickle'
 with open(z, "rb") as f:
     			decisions, isolated_predictions, positions, rank_info = pickle.load(f)
 f.close() 
 
+#%%
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
+os.chdir(path)
 
 file = open("top_100_labels.txt")
 labels=list()
@@ -91,6 +94,9 @@ if torch.cuda.is_available():
 
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
+else:
+    
+    device = 'cpu'
 
 class BiobertEmbedding(object):
     """
@@ -220,7 +226,11 @@ class BiobertEmbedding(object):
         return sentence_embedding
 
 biobert = BiobertEmbedding()
-#%%
+#%% replace the missing ground truth with some randomly selected labels from a larger pool 
+#   thus we sample here 20 labels randomly per label to be replaced
+#   and compute the Cosine similarity of the latter with the former ones, 
+#   This dictionary is latter exploited from the record_label_similarity_scores for mode3
+
 import random
 
 counter = 0
@@ -239,7 +249,7 @@ for label in all_k:
     elif len(label.split(" ")) > 1 or len(label.split("-")) > 1:
         label_array = biobert.sentence_vector(label)
     
-    ranks = []
+    #ranks = []
     for i in sampled_list:
 
         if len(i.split(" ")) == 1 and len(i.split("-")) == 1:
@@ -254,7 +264,7 @@ for label in all_k:
         print(counter)
 
 print(os.getcwd())
-with open('noisy_labels_70percent.pickle', 'wb') as handle:
+with open('noisy_labels_70percent_new.pickle', 'wb') as handle:
      pickle.dump(d, handle)                
 handle.close()
     

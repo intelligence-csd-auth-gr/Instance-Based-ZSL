@@ -36,7 +36,7 @@ y = []
 for line in file:
     y.append(line[2:-2].split("labels: #")[1])
 
-print('There are %d instances regarding MeSH 2020 and the selected top-100 novel labels regarding their frequency to the test set.' %len(y))
+print('\n#####\nThere are %d instances regarding MeSH 2020 and the selected top-100 novel labels regarding their frequency to the test set. \n#####\n' %len(y))
 
 
 new_y = []
@@ -219,9 +219,9 @@ biobert = BiobertEmbedding()
 #1. saving intermediate pickles per 5k instances 
 #2. save the necessary dataframes for all the test set or for specific instances (correction mode - not applicable here)
  
-save_choice = input('Do you want intermediate save of pickles?  \n\t Press y / n  ...')
-ZSL = input('Do you want to \n1: Examine the total test set (proper choice for the IBZSL approach) \n2: Correct only existing predictions (still not implemented)  \n\t Press 1 or 2 ... ')
-
+save_choice = input('\n#####\nDo you want intermediate save of pickles?  \n\t Press y / n  ... ')
+ZSL = input('\n#####\nDo you want to \n1: Examine the total test set (proper choice for the IBZSL approach) \n2: Correct only existing predictions (still not implemented)  \n\t Press 1 or 2 ... ')
+print('\n#####\n')
 
 if ZSL == '2':
     pass
@@ -256,13 +256,15 @@ batch = -1
 start = 0
 
 
-mode = int(input('Which mode do you want to apply:  \n1. All known labels are provided \n2. 70% of the known labels are provided \n3. 70% of the known labels are provided and noisy labels are added replacing the missing 30%  \n4. MTI predictions (existing state-of-the-art approach) \n\n Your choice ...  '))
-
+mode = int(input('\n#####\nWhich mode do you want to apply:  \n1. All known labels are provided \n2. 70% of the known labels are provided \n3. 70% of the known labels are provided and noisy labels are added in the place of the missing ones  \n4. MTI tool''s predictions (existing state-of-the-art approach) \n\n Your choice ...  '))
+print('\n#####\n')
+      
+      
 if mode == 3:
     
     arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking_shuffled_70percent_plus_noise.pickle'
     
-    with open("noisy_labels_70percent" + ".pickle", "rb") as f:
+    with open("noisy_labels_70percent.pickle", "rb") as f:
                 noisy_dict = pickle.load(f)
     f.close()
 
@@ -331,10 +333,13 @@ with open(_ + ".pickle", "rb") as f:
                 dict_top100 = pickle.load(f)
 f.close()
 
+print('\n#####\n')
 for i in dict_top100.keys():
-    print("There are %d different labels into the total predictions \n\n"  %len(dict_top100[i]))
-    
-    
+    print("There are %d different labels into the total predictions."  %len(dict_top100[i]))
+    break
+print('\n#####\n')
+ 
+ 
 #%% the main loop
 
 for n in range(start, end):

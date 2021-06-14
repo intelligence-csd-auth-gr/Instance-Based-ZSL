@@ -35,6 +35,10 @@ for line in file:
 files = ['label_dependence_results_top100labels_pureZSL_mode_44kranking.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent_plus_noise.pickle']
 approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_official.pickle', 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle' , 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle']
 
+os.chdir(r'D:\datasets\mode4')
+files = ['label_dependence_results_top100labels_pureZSL_mode_MTI_ranking_total.pickle' ]
+approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_MTI_official.pickle']
+
 for pos,f in enumerate(files):
     
     with open(f, "rb") as f:
@@ -46,7 +50,7 @@ for pos,f in enumerate(files):
     for i in range(0, len(isolated_predictions)):
         
         if type(isolated_predictions[i]) == list:
-            label_dependence.append(['Empty']) # i put the previous insead of random choice
+            label_dependence.append(['Empty']) # i put the previous instead of random choice
             print(i)
             continue
         else:
@@ -66,6 +70,9 @@ for pos,f in enumerate(files):
 
 files = ['label_dependence_results_top100labels_pureZSL_mode_44kranking.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent_plus_noise.pickle']
 approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_official.pickle', 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle', 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle']
+
+files = ['label_dependence_results_top100labels_pureZSL_mode_MTI_ranking_total.pickle' ]
+approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle']
 
 
 for pos,f in enumerate(files):

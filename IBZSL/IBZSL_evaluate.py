@@ -17,6 +17,7 @@ def bring_new_y(current_path):
     
     
     path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'  #define the path for pre-computed files  
+    path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'
     os.chdir(path)
     
     with open('novel_labels_actual.pickle', 'rb') as handle:
@@ -68,6 +69,7 @@ def one_rank_custom(y_test, y_pred):
 def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     
     path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'  #define the path for pre-computed files  
+    path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'
     os.chdir(path)
     
     with open('known_labels.pickle', 'rb') as handle:
@@ -99,18 +101,18 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
 #[30, 50)      2298
 #[50, 100)     2692
 
-path = ... # give the path of the appropriate folder into 'Results': ideal oracle - imperfect oracle 
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\MTI'#... # give the path of the appropriate folder into 'Results': ideal oracle - imperfect oracle 
 os.chdir(path)
 #%%
 files = os.listdir(os.getcwd())
 
-approach = ['LSSc(max)', 'w-LSSc(max)', 'ONZSL(max)', 'ONZSL(sum)' ]
+approach = ['LSSc(max)', 'w-LSSc(max)', 'IBZSL(max)', 'IBZSL(sum)' ]
 makeplot = True
 
 for pos,f in enumerate(files):
     
     files = os.listdir(os.getcwd())
-
+    print(pos,f)
     with open(f, "rb") as f:
         	label_dependence = pickle.load(f)
     f.close()
@@ -124,7 +126,7 @@ for pos,f in enumerate(files):
     k, k_list = coverage_custom(y_test, NN_bioBERT_44k_decisions)
     one_rank = one_rank_custom(y_test, NN_bioBERT_44k_decisions)
 
-    print('Approach: %s\n Coverage error:\t%4.3f \n One-error:\t\t%4.3f ' %(approach[pos], k, one_rank))
+    print('Approach: %s\n Coverage error:\t%16.3f \n One-error:\t\t%20.3f ' %(approach[pos], k, one_rank))
     
     if makeplot:
         pd.DataFrame(k_list).hist(bins = 100)

@@ -85,7 +85,8 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
     os.chdir(current_path)
     return y_test_new, y_preds_new
 ###################################################################################    
-#%%  you have to load the summarization files so as to examine the performance of the NN-bioBERT algorithms proposed by Chang et al. (reference 27) 
+#%%  you have to load the summarization files so as to examine the performance of the NN-bioBERT algorithms
+#    proposed by Chang et al. Importance of semantic representation: Dataless classification (reference 27) 
 
 path = ... # give the path of the appropriate folder into 'Results': baselines
 os.chdir(path)

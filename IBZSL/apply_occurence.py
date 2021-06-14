@@ -9,7 +9,6 @@ Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import pandas as pd
-import numpy as np
 import os, pickle
 
 
@@ -73,6 +72,10 @@ which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_
 # w-LSSc(sum) --> combined with the label_occurence it leads to ONZSL(sum)
 which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
 which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
+
+os.chdir(r'D:\datasets\mode4')
+which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
+which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
 ###############################################################################
 with open(which, "rb") as f:
     	label_dependence = pickle.load(f)
