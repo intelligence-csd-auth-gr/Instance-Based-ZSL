@@ -34,17 +34,21 @@ Here are added some files for accelerating the execution of several needed compu
  1. *keys*: are the names of all the known labels into the examined test set, 
  2. *values*: their bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
-- **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them.
+- **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them. We depict here the first 5 items of this list:
+
+```
+[ ['Fluorodeoxyglucose F18', 'Glycolysis', 'Humans', 'Lymphoma, Extranodal NK-T-Cell', 'Positron Emission Tomography Computed Tomography','Positron-Emission         Tomography','Prognosis','Radiopharmaceuticals','Retrospective Studies','Survival Analysis','Tumor Burden'],
+  ['Bacillus subtilis','China','Fermentation','Glucosidases','Peptide Hydrolases','RNA, Ribosomal, 16S','Soy Foods'],
+  ['Catheter Ablation','Delivery, Obstetric','Female','Fetofetal Transfusion','Gestational Age','Humans','Infant, Newborn','Pregnancy','Pregnancy Outcome','Pregnancy Reduction, Multifetal','Pregnancy, Twin','Retrospective Studies','Treatment Outcome','Twins, Monozygotic'], ...]
+```
 
 - **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item is into the next format: 
- 'label_1#label_2#...#label_r'. We depict here the first 5 items of this list:
+ 'label_1#label_2#...#label_r'. We depict here the first 3 items of this list:
 
 ```
 ['Data Analysis#Progression-Free Survival',
  'None',
- 'Information Technology#Gestational Weight Gain#Radiofrequency Ablation',
- 'Gestational Weight Gain#Treatment Adherence and Compliance#Radiofrequency Ablation',
- 'Water Pipe Smoking#Water Sports#Pyrolysis#Liquid Biopsy']
+ 'Information Technology#Gestational Weight Gain#Radiofrequency Ablation']
 ```
 
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose:
