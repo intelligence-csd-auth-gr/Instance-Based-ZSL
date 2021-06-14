@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 22 23:49:50 2020
-
-@author: 
-    
-"""
 import os, pickle
 
 path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\imperfect oracle'#... #define the path for pre-computed files  

@@ -1,10 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jul 15 10:44:38 2020
+
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
+"""
+
 import pickle
-#from sklearn.metrics import f1_score,hamming_loss
-#from sklearn.preprocessing import MultiLabelBinarizer
 import numpy as np
 import pandas as pd
 import os
-#import copy
+
 
 
 path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
@@ -53,7 +61,6 @@ del choice, file, test_file, label_y, string, flag, label, path, string_known, l
 
 #%% use the bioBERT library, assigning embeddings computations to GPU 
 
-#from scipy.spatial import distance
 import tensorflow as tf
 from biobert_embedding import downloader
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM    
@@ -208,19 +215,12 @@ class BiobertEmbedding(object):
 ## call the above class
 biobert = BiobertEmbedding()
 
-#%% we have saved into pickle the similarity scores of the top-100 novel labels and all the known labels for accelerting the reproduction of experiments
-
-_ = 'dict_top100_labels_similarities'
-with open(_ + ".pickle", "rb") as f:
-                dict_top100 = pickle.load(f)
-f.close()
-
 #%% Decide for: 
 #1. saving intermediate pickles per 5k instances 
 #2. save the necessary dataframes for all the test set or for specific instances (correction mode - not applicable here)
  
 save_choice = input('Do you want intermediate save of pickles?  \n\t Press y / n  ...')
-ZSL = input('Do you want to \n1: examine the total test set \n2: Correct only existing predictions  \n\t Press 1 or 2 ... ')
+ZSL = input('Do you want to \n1: Examine the total test set (proper choice for the IBZSL approach) \n2: Correct only existing predictions (still not implemented)  \n\t Press 1 or 2 ... ')
 
 
 if ZSL == '2':
@@ -315,7 +315,27 @@ elif mode == 4:
         known_y = y_mti
     
 else:
-    exit('Wrong input')
+    raise SystemExit('Wrong input')
+
+
+#%% we have saved into pickle the similarity scores of the top-100 novel labels and all the existing labels
+#   per case for accelerting the reproduction of experiments
+
+if mode == 4:
+    _ = 'dict_similarities_novel_MTI_labels'
+else:
+    _ = 'dict_similarities_novel_known_labels'
+    
+    
+with open(_ + ".pickle", "rb") as f:
+                dict_top100 = pickle.load(f)
+f.close()
+
+for i in dict_top100.keys():
+    print("There are %d different labels into the total predictions \n\n"  %len(dict_top100[i]))
+    
+    
+#%% the main loop
 
 for n in range(start, end):
     
