@@ -55,9 +55,9 @@ Here are added some files for accelerating the execution of several needed compu
  'Information Technology#Gestational Weight Gain#Radiofrequency Ablation']
 ```
 
-- **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose:
+- **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose (currently there are 11,791 different keys, but this number can vary based on the random character of the artificial injected noise):
  1. *keys*: the known labels that are replaced during the imperfect oracle scenario, 
- 2. *values*: a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding cosine similarity score with the original key of upper level.
+ 2. *values*: a dictionary with 20 randomly selected MeSH terms in the role of keys, and their corresponding *Cosine similarity score* with the original key of upper level.
 
 - **novel_labels_actual.pickle** 🠊 the actual novel labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them. We depict here the first 3 items of this list:
 
@@ -81,7 +81,7 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the *frLabel* set (choice == 1) or the existing known labels per instance (choice == 2). The 5 produced *.pickle* files per case are equal in total to 6.75 GB and 213 MB, respectively.
 
-- **add_noisy_labels.py** 🠊 the process under which the **noisy_labels_70percent.pickle** file is produced.
+- **add_noisy_labels.py** 🠊 the process under which the **noisy_labels_70percent.pickle** file is produced, which is later used for simulating the scenario under which noisy predictions regarding the existing labels are provided before the proposed **IBZSL** approach is applied.
 
 
 ### On-the-fly baseline
