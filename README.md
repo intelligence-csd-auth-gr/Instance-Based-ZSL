@@ -35,7 +35,11 @@ Here are added some files for accelerating the execution of several needed compu
  2.*values*: the bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
 - **known_labels_embeddings.pickle** 🠊 a dictionary structure whose:
- 1. *keys*: are the names of all the known labels into the examined test set, 
+ 1. *keys*: are the names of all the known labels for the examined test set, 
+ 2. *values*: their bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
+
+- **MTI_labels_embeddings.pickle** 🠊 a dictionary structure whose:
+ 1. *keys*: are the names of all the predicted labels for the examined test set by the MTI tool, 
  2. *values*: their bioBERT embedding vector of each key stored as a Numpy array *(768,)*.
 
 - **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them. We depict here the first 5 items of this list:
@@ -82,6 +86,8 @@ We describe the necessary files that need to be executed for producing the offic
 - **calculate_similarities.py** 🠊 based on the pickles that are created from the above script, we compute the Cosine similarity scores of each sentence per different abstract with either the *frLabel* set (choice == 1) or the existing known labels per instance (choice == 2). The 5 produced *.pickle* files per case are equal in total to 6.75 GB and 213 MB, respectively.
 
 - **add_noisy_labels.py** 🠊 the process under which the **noisy_labels_70percent.pickle** file is produced, which is later used for simulating the scenario under which noisy predictions regarding the existing labels are provided before the proposed **IBZSL** approach is applied.
+
+- **compute_label_similarities_per_pair.py** 🠊 this script computes the *Cosine similarity score* of each pair between the labels into the *frLabel* set and all the distinct labels that appear at least once into the total predictions. Currently, there are two choices: i) All the actual labels, ii) The labels that are predicted by the MTI tool. Thus, the dictionary object that is produced contains 100 keys (the number of the novel labels, which equals to the size of the *frLabel* set) and *k* values per key, where *k* equals to the number of all the different existing labels. For the two implemented cases, *k*  equals to 17,482 and 22,227, respectively. At the same time, we store here the embeddings vectors of each label into the *frLabel* set (**novel_labels_embeddings.pickle**), as well as the same vectors for the existing labels per case (**known_labels_embeddings.pickle** , **MTI_labels_embeddings.pickle**)
 
 
 ### On-the-fly baseline
