@@ -37,9 +37,15 @@ Here are added some files for accelerating the execution of several needed compu
 - **known_labels.pickle** 🠊 the known labels of the whole test set, being stored as a list with list items per instance, which contain the separate labels inside them.
 
 - **predictions_label_occurence.pickle** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item is into the next format: 
- 'label_1#label_2#...#label_r'.
+ 'label_1#label_2#...#label_r'. We depict here the first 5 items of this list:
 
-- **abstract_occurence_predictions** 🠊 the output of the label occurence stage for the whole test size into a list structure, where each item contains a list with the predictions.
+```
+['Data Analysis#Progression-Free Survival',
+ 'None',
+ 'Information Technology#Gestational Weight Gain#Radiofrequency Ablation',
+ 'Gestational Weight Gain#Treatment Adherence and Compliance#Radiofrequency Ablation',
+ 'Water Pipe Smoking#Water Sports#Pyrolysis#Liquid Biopsy']
+```
 
 - **noisy_labels_70percent.pickle** 🠊 a dictionary structure whose:
  1. *keys*: the known labels that are replaced during the imperfect oracle scenario, 
