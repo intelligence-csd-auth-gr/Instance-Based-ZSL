@@ -265,4 +265,4 @@ with open('noisy_labels_70percent.pickle', 'wb') as handle:
      pickle.dump(d, handle)                
 handle.close()
     
-print('**Adding noisy labels intead of the rejected ones***')
+print('**Adding noisy labels instead of the rejected ones***')
