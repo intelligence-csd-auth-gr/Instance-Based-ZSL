@@ -9,26 +9,57 @@ Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
-path = r'C:\Users\stama\Documents\github\\'
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI'
+os.chdir(path)
 
+choice = input('Give your choice regarding the set of predicted existing labels that you want to evaluate: \nmode1. Ground truth \nmode2. 70% of the ground truth without noisy labels \nmode3. 70% of the ground truth with 30% random noisy labels \nmode4. MTI-tool predictions (state-of-the-art approach) \nmode5. User defined predictions \n\n ...')
 
-choice = input('Give your choice regarding the set of predicted existing labels that you want to evaluate: \n1. MTI \n2. Noisy labels (random choice) \n\n ...')
 
 if choice == '1':
 
-	os.chdir(path + '\Instance-Based-ZSL\MTI')
-	z = 'mti_predictions.pickle'
+	z = 'known_y_mode1.pickle' 
 
 	with open(z, "rb") as f:
-	    		y_preds = pickle.load(f)
+				y_preds_mode1 = pickle.load(f)
 	f.close() 
-
+	y_preds = y_preds_mode1
 
 elif choice == '2':
    
+
+	z = 'known_y_mode2.pickle' 
+
+	with open(z, "rb") as f:
+				y_preds_mode2 = pickle.load(f)
+	f.close()
+	y_preds = y_preds_mode2
+
+elif choice == '3':
+
+	z = 'known_y_mode3.pickle' 
+
+	with open(z, "rb") as f:
+				y_preds_mode3 = pickle.load(f)
+	f.close() 
+	y_preds = y_preds_mode3
+
+
+elif choice == '4':
+   
+	z = 'known_y_mode4.pickle' 
+
+	with open(z, "rb") as f:
+				y_preds_mode4 = pickle.load(f)
+	f.close()
+	y_preds = y_preds_mode4
+
+
+elif choice == '5':
+   
    # user can provide any other .pickle file that contains predictions of the existing labels per test instance and obtain the corresponding metrics, as in the case of MTI
 	#os.chdir(path + '\Instance-Based-ZSL\pre-computed files')
-	#z = 'noisy_labels_.pickle' 
+	
+    #z = 'user_predictions.pickle' 
 
 	with open(z, "rb") as f:
 	    		y_preds = pickle.load(f)
@@ -37,16 +68,23 @@ elif choice == '2':
 else:
 	raise SystemExit('Wrong input')
 
+
+cmode = 0
+
+for i in y_preds_mode4:
+    for j in i:
+        cmode += len(j)
+print('The current mode contains %d predictions for all the test set' %cmode)
+        
 # load the actual labels
-os.chdir(path + '\Instance-Based-ZSL\pre-computed files')
+os.chdir(r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files')
 z = 'known_labels.pickle'
 
 with open(z, "rb") as f:
     		y_actual = pickle.load(f)
 f.close() 
 
-
-#%%
+#%% evaluation
 
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import MultiLabelBinarizer
