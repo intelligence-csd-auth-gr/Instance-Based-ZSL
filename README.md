@@ -110,7 +110,7 @@ We have exploited the online tool of MTI ([Medical Text Indexer by National Libr
 - **mti_output_manipulation.py** 🠊 this script runs a series of commands for transforming the output of the MTI tool to a proper list structure for our evaluations. Its output is stored into the **mti_predictions.pickle** file, which is further exploited  by our main pipeline for obtaining the performance of the proposed algorithm under a set of realistic decisions for the seen labels.
 
 
-### IBZSL
+## IBZSL (the proposed algorith)
 
 - **record_label_similaritiy_scores.py** 🠊 this files examines the known label vector of each given abstract (implementing 3 different assumptions: i) all known labels, ii) 70% of the known labels, iii) 70% of the known labels along with some noisy labels are provided) and exports a *.pickle* file which contains for each examined instance a *Pandas DataFrame* with the relative similarities of the investigated novel labels and the existing ones, respectively.
 
