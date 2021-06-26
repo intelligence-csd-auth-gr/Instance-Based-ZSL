@@ -100,6 +100,13 @@ We describe the necessary files that need to be executed for producing the offic
 
 - **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the metrics of *Coverage* and *1-error*, as well as produces some appropriate histograms plots and prints additional information about the achieved rankings.
 
+### MTI tool
+We have exploited the online tool of MTI ((Medical Text Indexer by National Library of Medicine)[https://ii.nlm.nih.gov/MTI/]) for obtaining realistic predictions. Thus, we have the chance of applying our proposed algorithm based on a widely accepted tool that exports supervised predictions for the seen labels.
+
+- **mti_output.out** 🠊 predictions of MTI tool for the examined test set
+
+- **mti_output_manipulation.py** 🠊 this script runs a series of commands for transforming the output of the MTI tool to a proper list structure for our evaluations. Its output is stored into the **mti_predictions.pickle** file, which is further exploited  by our main pipeline for obtaining the performance of the proposed algorithm under a set of realistic decisions for the seen labels.
+
 ### IBZSL
 
 - **record_label_similaritiy_scores.py** 🠊 this files examines the known label vector of each given abstract (implementing 3 different assumptions: i) all known labels, ii) 70% of the known labels, iii) 70% of the known labels along with some noisy labels are provided) and exports a *.pickle* file which contains for each examined instance a *Pandas DataFrame* with the relative similarities of the investigated novel labels and the existing ones, respectively.
