@@ -18,6 +18,7 @@ Some brief documentation is provided here for running all the necessary steps, s
 
 - **pure_zero_shot_test_set_top100.7z** 🠊 it actually contains all the examined test abstracts into one *.txt* file.
 
+
 ### Pre-computed files
 
 Here are added some files for accelerating the execution of several needed computations:
@@ -101,11 +102,13 @@ We describe the necessary files that need to be executed for producing the offic
 - **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the metrics of *Coverage* and *1-error*, as well as produces some appropriate histograms plots and prints additional information about the achieved rankings.
 
 ### MTI tool
+
 We have exploited the online tool of MTI ([Medical Text Indexer by National Library of Medicine](https://ii.nlm.nih.gov/MTI/)) for obtaining realistic predictions. Thus, we have the chance of applying our proposed algorithm based on a widely accepted tool that exports supervised predictions for the seen labels.
 
 - **mti_output.out** 🠊 predictions of MTI tool for the examined test set
 
 - **mti_output_manipulation.py** 🠊 this script runs a series of commands for transforming the output of the MTI tool to a proper list structure for our evaluations. Its output is stored into the **mti_predictions.pickle** file, which is further exploited  by our main pipeline for obtaining the performance of the proposed algorithm under a set of realistic decisions for the seen labels.
+
 
 ### IBZSL
 
@@ -120,14 +123,21 @@ We have exploited the online tool of MTI ([Medical Text Indexer by National Libr
 - **apply_occurence.py** 🠊 this file combines the predictions from label occurence with any provided ranking from the (un)weighted stages, storing the final decisions of the proposed algorithm into a proper *.pickle* file per time.
 
 - **IBZSL_evaluate.py** 🠊 the script through which the *Coverage* and the *1-error* metrics are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, since these computations are computed into their corresponding files. Additionally, appropriate histograms and useful stats (frequency of correct predictions) are computed here, which are not recorded into the manuscript due to lack of space.
-                            
+
+
+### Supervised predictions
+
+This folder contains the supervised predictions of each examined mode. For mode3, there are provided all the 3 different seed-based versions of the decisions.
+
+- **evaluate_modes.py** 🠊 we provide here the code for evaluating the supervised performance of each mode regarding the seen labels.
+
+
 ### Results
 
 Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
 
 - **ideal oracle** and **imperfect oracle** 🠊 exploited under the **IBZSL_evaluate.py**
 - **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the existing *.7z* files)
-
 
 
 ## Requirements/Dependencies
@@ -149,9 +159,11 @@ Our code has been tested on Windows10 using python 3.7.6. The next libaries are 
 | Nikolaos Mylonas    (Νικόλαος Μυλωνάς)     | myloniko@csd.auth.gr |
 | Grigorios Tsoumakas (Γρηγόριος Τσουμάκας)  |  greg@csd.auth.gr    |
 
+
 ## Funded by
 
 The research work was supported by the Hellenic Foundation forResearch and Innovation (H.F.R.I.) under the “First Call for H.F.R.I.Research Projects to support Faculty members and Researchers and the procurement of high-cost research equipment grant” (ProjectNumber: 514).
+
 
 ## Additional resources
 
