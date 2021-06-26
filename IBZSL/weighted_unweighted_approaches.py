@@ -9,22 +9,18 @@ Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
-path = ... #define the path for pre-computed files  
-os.chdir(path)
-
-#%%
-# load values with max or other selected function per instance and label    
+#path = ... #define the path for pre-computed files  
+#os.chdir(path)
 
 path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
+#%% load values with max or other selected function per instance and label    
 
 z = 'max_values_per_top100labels'
 with open(z + ".pickle", "rb") as f:
     			max_l_values = pickle.load(f)
 f.close()    
 
-#import copy
-#max_l_values = copy.deepcopy(l) 
 
 file = open("top_100_labels.txt")
 labels=list()
@@ -32,8 +28,7 @@ for line in file:
     labels.append(line[:-1])
 
 
-
-# unweighted version
+#%% unweighted version
     
 files = ['label_dependence_results_top100labels_pureZSL_mode_44kranking.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent_plus_noise.pickle']
 approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_official.pickle', 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle' , 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle']
@@ -51,8 +46,12 @@ files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickl
 approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking.pickle']
 
 os.chdir(r'D:\datasets\mode3')
-files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
+files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
+approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
+
+os.chdir(r'D:\datasets\mode3 seed23')
+files = ['label_dependence_results_top100labels_pureZSL_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
+approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
 
 
 
@@ -100,6 +99,8 @@ approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mod
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
 approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
 
+files = ['label_dependence_results_top100labels_pureZSL_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
+approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
 
 for pos,f in enumerate(files):
     

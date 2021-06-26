@@ -12,24 +12,24 @@ Grigorios Tsoumakas greg@csd.auth.gr
 import os
 import numpy as np
 
-os.chdir(r'D:\Google Drive\open issues\PR letters Amulet')
-filepath = 'text.out'
-
 def mti_to_list(line):
 	_ = line.split('|')
 	key, value = _[0], _[1]
 	d = {}
 	d[key] = value
 	return  d
+
+# provide the path that contains the mti_output.out
+os.chdir('..Instance-Based-ZSL\MTI')
+filepath = 'mti_output.out'
+
 ####################################################################################
-c = 0
 y_mti = {}
 
 with open(filepath) as fp:
 	line = fp.readline()
 	while line:
 
-		c += 1
 		#print("Line {}: {}".format(cnt, line.strip()))
         
 		d = mti_to_list(line)
@@ -49,15 +49,17 @@ for i in y_mti.keys():
     y_mti_proper[int(i)] = y_mti[i].split('#')[1:]
 
 values = []
-    
+counter = 0
+
 # store the predictions into a list, which is compatible with our implementation
 mti_proper_list = []
 for i in y_mti_proper.keys():
     mti_proper_list.append(y_mti_proper[i])
+    counter += len(y_mti_proper[i])
     values.append(len(y_mti_proper[i]))
     
     
-print('Number of predictions for our examined dataset: \n\nInstances: %d\tAmount of predictions: %d\nAverage number of predictions per instance (MTI): %6.3f \nStd of the amount of predictions per instance (MTI): %6.3f' %( len(mti_proper_list), c, np.round(c / len(mti_proper_list), 3), np.round(np.std(values), 3) ))
+print('Number of predictions for our examined dataset: \n\nInstances: %d\tAmount of predictions: %d\nAverage number of predictions per instance (MTI): %6.3f \nStd of the amount of predictions per instance (MTI): %6.3f' %( len(mti_proper_list), counter, np.round(counter / len(mti_proper_list), 3), np.round(np.std(values), 3) ))
     
 #%%
 import pickle

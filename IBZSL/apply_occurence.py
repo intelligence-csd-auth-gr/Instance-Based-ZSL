@@ -14,9 +14,6 @@ import os, pickle
 
 def positions_with_empty_known_labels(current_path):
     
-    path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'  #define the path for pre-computed files  
-    os.chdir(path)
-    
     with open('known_labels.pickle', 'rb') as handle:
         known_y = pickle.load(handle)                
     handle.close()
@@ -31,7 +28,7 @@ def positions_with_empty_known_labels(current_path):
     return empty_known_labls
 
 ##############################################################################
-path = r'C:\Users\stam\Documents\git\AMULET_SCIS\pre-computed files'
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'
 os.chdir(path)
 
 
@@ -41,13 +38,16 @@ with open(z + ".pickle", "rb") as f:
 f.close()
 
 y_occ = []
+
 for i in y:
 	y_occ.append(i.split('#'))
 
 # we detect the positions where the label occurence returns 'None' as a decision
 where = []
 c = -1
+
 for i in y_occ:
+    
     c +=1
     if i == ['None']:
         where.append(c)
@@ -57,7 +57,7 @@ empty_pos = positions_with_empty_known_labels(path)
 
 ##############################################################################
 # here we load the vector with predictions
-os.chdir(r'D:\BioASQ\evaluate_py')
+#os.chdir(r'D:\BioASQ\evaluate_py')
 
 ###### these are the files that are evaluated into the original work #########
 
