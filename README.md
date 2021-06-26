@@ -101,7 +101,7 @@ We describe the necessary files that need to be executed for producing the offic
 - **NN_bioBERT_evaluate** 🠊 given the two summarization files from the above script into one folder, it computes the metrics of *Coverage* and *1-error*, as well as produces some appropriate histograms plots and prints additional information about the achieved rankings.
 
 ### MTI tool
-We have exploited the online tool of MTI ((Medical Text Indexer by National Library of Medicine)[https://ii.nlm.nih.gov/MTI/]) for obtaining realistic predictions. Thus, we have the chance of applying our proposed algorithm based on a widely accepted tool that exports supervised predictions for the seen labels.
+We have exploited the online tool of MTI ([Medical Text Indexer by National Library of Medicine](https://ii.nlm.nih.gov/MTI/)) for obtaining realistic predictions. Thus, we have the chance of applying our proposed algorithm based on a widely accepted tool that exports supervised predictions for the seen labels.
 
 - **mti_output.out** 🠊 predictions of MTI tool for the examined test set
 
