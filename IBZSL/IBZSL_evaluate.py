@@ -101,12 +101,13 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
 #[30, 50)      2298
 #[50, 100)     2692
 
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\MTI'#... # give the path of the appropriate folder into 'Results': ideal oracle - imperfect oracle 
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\cc'#... # give the path of the appropriate folder into 'Results': ideal oracle - imperfect oracle 
 os.chdir(path)
 #%%
 files = os.listdir(os.getcwd())
 
 approach = ['LSSc(max)', 'w-LSSc(max)', 'IBZSL(max)', 'IBZSL(sum)' ]
+approach = ['a','b','c']
 makeplot = True
 
 for pos,f in enumerate(files):

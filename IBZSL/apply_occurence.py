@@ -76,6 +76,22 @@ which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_shuffled_
 os.chdir(r'D:\datasets\mode4')
 which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
 which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
+
+os.chdir(r'D:\datasets\mode4')
+which = 'label_dependence_max_sum_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
+which = 'label_dependence_max_sum_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
+
+os.chdir(r'D:\datasets\mode2')
+which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle'
+which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle'
+
+os.chdir(r'D:\datasets\mode1')
+which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_rankingt.pickle'
+which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking.pickle'
+
+os.chdir(r'D:\datasets\mode3')
+which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle'
+which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle'
 ###############################################################################
 with open(which, "rb") as f:
     	label_dependence = pickle.load(f)
