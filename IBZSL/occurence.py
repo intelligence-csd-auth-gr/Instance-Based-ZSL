@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 15 10:17:06 2020
+
+@authors:
+Nikos Mylonas   myloniko@csd.auth.gr
+Stamatis Karlos stkarlos@csd.auth.gr
+Grigorios Tsoumakas greg@csd.auth.gr
+"""
+
 import os, pickle
 
 def get_abstract_occurence_preds(labels,abstracts):
@@ -46,4 +56,4 @@ for line in file:
     y.append(line[2:-2].split("labels: #")[1])
     x.append(line[2:-2].split("labels: #")[0])
 
-preds = get_abstract_occurence_preds(top_labels,x)
+preds = get_abstract_occurence_preds(top_labels, x)

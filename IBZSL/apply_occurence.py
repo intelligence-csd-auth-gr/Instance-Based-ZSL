@@ -12,7 +12,7 @@ import pandas as pd
 import os, pickle
 
 
-def positions_with_empty_known_labels(current_path):
+def positions_with_empty_known_labels():
     
     with open('known_labels.pickle', 'rb') as handle:
         known_y = pickle.load(handle)                
@@ -22,21 +22,20 @@ def positions_with_empty_known_labels(current_path):
     for i in range(0, len(known_y)):
         if known_y[i] == ['']:
             empty_known_labls.append(i)
-
     
-    os.chdir(current_path)
     return empty_known_labls
 
 ##############################################################################
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files' #define the path for pre-computed files
 os.chdir(path)
 
-
+# load the predictions from the label occurence heuristic
 z = 'predictions_label_occurence'
 with open(z + ".pickle", "rb") as f:
     			y	 = pickle.load(f)
 f.close()
 
+# transform the predictions from the heuristic of abstract occurence into compatible format for our experiments
 y_occ = []
 
 for i in y:
@@ -56,42 +55,20 @@ for i in y_occ:
 empty_pos = positions_with_empty_known_labels(path)
 
 ##############################################################################
-# here we load the vector with predictions
-#os.chdir(r'D:\BioASQ\evaluate_py')
+# here we load the vector with predictions as it is exported per evaluated mode from the file weighted_unweighted_approaches.py
 
-###### these are the files that are evaluated into the original work #########
 
-# LSSc(max)
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_official.pickle'
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
+###### these are the files that are evaluated into the original work for mode1 (ideal oracle) #########
 
-# w-LSSc(max) --> combined with the label_occurence it leads to ONZSL(max) ** proposed one
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
 
-# w-LSSc(sum) --> combined with the label_occurence it leads to ONZSL(sum)
-which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_official.pickle'
-which = 'label_dependence_sum_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle'
+# w-LSSc(max) --> combined with the label_occurence it leads to IBZSL(max) ** this is the proposed one
+which = 'label_dependence_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle'
+kind = 'max'
 
-os.chdir(r'D:\datasets\mode4')
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
+# w-LSSc(sum) --> combined with the label_occurence it leads to IBZSL(sum) ** this appears into the manuscript as a competitor (different variant for weighting with the sentences)
+#which = 'label_dependence_sum_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle
+#kind = 'sum'
 
-os.chdir(r'D:\datasets\mode4')
-which = 'label_dependence_max_sum_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
-which = 'label_dependence_max_sum_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle'
-
-os.chdir(r'D:\datasets\mode2')
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle'
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle'
-
-os.chdir(r'D:\datasets\mode1')
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_rankingt.pickle'
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking.pickle'
-
-os.chdir(r'D:\datasets\mode3')
-which = 'label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle'
-which = 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle'
 ###############################################################################
 with open(which, "rb") as f:
     	label_dependence = pickle.load(f)
@@ -129,6 +106,7 @@ if makeplot:
 
 
 # save the vector with the ranked decisions having also applied the label occurence stage
-with open('occurence_modified_' + which,  'wb') as handle:
+filename = which.split('weighted_')[0] + 'weighted_' + kind + '_' + which.split('weighted_')[1]
+with open(filename ,  'wb') as handle:
      pickle.dump(yy, handle)                
 handle.close()

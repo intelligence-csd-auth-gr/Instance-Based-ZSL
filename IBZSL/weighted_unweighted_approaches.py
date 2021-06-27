@@ -27,38 +27,20 @@ labels=list()
 for line in file:
     labels.append(line[:-1])
 
-
-#%% unweighted version
+#%% we load the file that is created from the record_label_similaritiy_scores.py
     
-files = ['label_dependence_results_top100labels_pureZSL_mode_44kranking.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent_plus_noise.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_official.pickle', 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle' , 'label_dependence_max_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle']
+###### these are the files that are evaluated into the original work for mode1 (ideal oracle) #########
 
-os.chdir(r'D:\datasets\mode4')
-files = ['label_dependence_results_top100labels_pureZSL_mode_MTI_ranking_total.pickle' ]
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_MTI_official.pickle']
+# unweighted version (LSSc with max label similarity) -> you can add the rest file names into the two next lists
 
-os.chdir(r'D:\datasets\mode2')
-files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle']
-
-os.chdir(r'D:\datasets\mode1')
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking.pickle']
-
-os.chdir(r'D:\datasets\mode3')
-files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
-
-os.chdir(r'D:\datasets\mode3 seed23')
-files = ['label_dependence_results_top100labels_pureZSL_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
-approaches = ['label_dependence_max_NN_bioBERT_44k_decisions_scores_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
-
+approaches = ['label_dependence_bioBERT_44k_decisions_scores_mode_ranking.pickle']
 
 
 for pos,f in enumerate(files):
     
     with open(f, "rb") as f:
-        			decisions, isolated_predictions, positions, rank_info = pickle.load(f)
+        decisions, isolated_predictions, positions, rank_info = pickle.load(f)
     f.close() 
 
 
@@ -66,13 +48,12 @@ for pos,f in enumerate(files):
     for i in range(0, len(isolated_predictions)):
         
         if type(isolated_predictions[i]) == list:
-            label_dependence.append(['Empty']) # i put the previous instead of random choice
+            label_dependence.append(['Empty']) # i put the previous instead of random choice -> this is removed later
             print(i)
             continue
         else:
             q = isolated_predictions[i].max().rank(ascending = False) 
             label_dependence.append(list(q.sort_values(ascending=True).index))
-
 
 
     print(os.getcwd())
@@ -82,41 +63,34 @@ for pos,f in enumerate(files):
 
 
 
-# weighted version
-
-files = ['label_dependence_results_top100labels_pureZSL_mode_44kranking.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent.pickle', 'label_dependence_results_top100labels_pureZSL_mode_44kranking_shuffled_70percent_plus_noise.pickle']
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_official.pickle', 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_official.pickle', 'label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_shuffled_70percent_plus_noise_official.pickle']
-
-files = ['label_dependence_results_top100labels_pureZSL_mode_MTI_ranking_total.pickle' ]
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_MTI_official.pickle']
-
-files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent.pickle']
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle']
+# weighted version (RankSc with max label similarity and the selected similarity between labels and sentences) -> you can add the rest file names into the two next lists
 
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickle']
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking.pickle']
+approaches = ['label_dependence_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle']
 
-files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent_plus_noise.pickle_total.pickle']
-
-files = ['label_dependence_results_top100labels_pureZSL_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
-approaches = ['label_dependence_max_weighted_NN_bioBERT_44k_decisions_scores_random_23_mode_ranking_shuffled_70percent_plus_noise_total.pickle']
+kind = input('Give your input for the kind of the weighting stage between the labels and the sentences:\n1. max \2. sum\n\n .. ')
 
 for pos,f in enumerate(files):
     
     with open(f, "rb") as f:
-        			decisions, isolated_predictions, positions, rank_info = pickle.load(f)
+        decisions, isolated_predictions, positions, rank_info = pickle.load(f)
     f.close() 
     
     
     label_dependence = []
     for i in range(0, len(isolated_predictions)):
+        
         if type(isolated_predictions[i]) == list:
             label_dependence.append(['Empty']) 
             print(i)
             continue
         else:
-            qq = isolated_predictions[i].max() # could be replaced with .sum()
+            
+            if kind == '1':
+                qq = isolated_predictions[i].max()
+            else:
+                qq = isolated_predictions[i].sum()
+                
             for label in labels:
                 qq.loc[label] = qq.loc[label] * max_l_values[label][i]
             

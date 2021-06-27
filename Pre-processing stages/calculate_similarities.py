@@ -49,9 +49,11 @@ def find_similarities(label_embeddings, test_embeddings, this_count, search_regi
 ##############################################################################
 # load from the pre-computed folder
 
-path = r'D:\BioASQ\evaluate_py'
+path = # define the output folder path   e.g. r'D:\BioASQ\evaluate_py'
 os.chdir(path)
+
 choice = int(input('Press your choice: Compute similarities between each test abstract and \n1. all the top100 labels? \n2. each known label? \n... '))
+
 
 if choice == 1:
     name = 'label_embeddings_top100'
