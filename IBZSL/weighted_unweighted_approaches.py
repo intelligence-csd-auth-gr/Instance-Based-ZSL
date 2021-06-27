@@ -34,7 +34,7 @@ for line in file:
 # unweighted version (LSSc with max label similarity) -> you can add the rest file names into the two next lists
 
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickle']
-approaches = ['label_dependence_bioBERT_44k_decisions_scores_mode_ranking.pickle']
+approaches = ['label_dependence_SW_unweighted_bioBERT_44k_decisions_scores_mode_ranking.pickle']
 
 
 for pos,f in enumerate(files):
@@ -64,11 +64,19 @@ for pos,f in enumerate(files):
 
 
 # weighted version (RankSc with max label similarity and the selected similarity between labels and sentences) -> you can add the rest file names into the two next lists
+kind = input('Give your input for the kind of the weighting stage between the labels and the sentences:\n1. max \n2. sum\n\n .. ')
+if kind == '1':
+    kind_str = 'max'
+else:
+    kind_str = 'sum'
 
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickle']
-approaches = ['label_dependence_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle']
+approaches = ['label_dependence_SW_weighted_' + kind_str + '_bioBERT_44k_decisions_scores_mode_ranking.pickle']
 
-kind = input('Give your input for the kind of the weighting stage between the labels and the sentences:\n1. max \2. sum\n\n .. ')
+#os.chdir(r'D:\datasets\mode2')
+#files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent.pickle']
+#approaches = ['label_dependence_weighted_' + kind_str + '_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle']
+
 
 for pos,f in enumerate(files):
     

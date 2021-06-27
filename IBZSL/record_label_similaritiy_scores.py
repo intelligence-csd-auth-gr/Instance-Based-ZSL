@@ -14,15 +14,16 @@ import pandas as pd
 import os
 
 
-
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
+path = '/home/stkarlos/Instance-Based-ZSL/pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
 
 choice = int(input('How many labels you want? \n1: 100 labels \n2: user defined labels (add .txt file into source path) \n\n Your choice ...  '))
+
 if choice == 1:
 
     file = open("top_100_labels.txt")
     labels=list()
+
     for line in file:
         labels.append(line[:-1])
 
@@ -33,18 +34,19 @@ else:
 test_file = 'pure_zero_shot_test_set_top100.txt'
 file = open(test_file)
 y = []
+
 for line in file:
     y.append(line[2:-2].split("labels: #")[1])
 
 print('\n#####\nThere are %d instances regarding MeSH 2020 and the selected top-100 novel labels regarding their frequency to the test set. \n#####\n' %len(y))
 
-
 new_y = []
 known_y = []
+
 for label_y in y:
     string = ""
     flag = "false"
-    string_known=""
+    string_known = ""
     for label in label_y.split("#"):
         if label in labels:
             flag = "true"
@@ -55,7 +57,6 @@ for label_y in y:
         string = "None#"
     new_y.append(string[:-1].split('#'))
     known_y.append(string_known[:-1].split('#'))
-
 
 del choice, file, test_file, label_y, string, flag, label, path, string_known, line
 
@@ -215,6 +216,11 @@ class BiobertEmbedding(object):
 ## call the above class
 biobert = BiobertEmbedding()
 
+import random
+rand = input('Give random seed: .. ')
+random.seed(int(rand))
+
+
 #%% Decide for: 
 #1. saving intermediate pickles per 5k instances 
 #2. save the necessary dataframes for all the test set or for specific instances (correction mode - not applicable here)
@@ -230,7 +236,7 @@ if ZSL == '2':
 else:
     end = len(new_y)
     where = []
-    scenario = 'pureZSL'
+    scenario = 'pureZSL' + '_random_' + rand 
 
 
 def set_pos(ZSL,n,where):
@@ -241,9 +247,6 @@ def set_pos(ZSL,n,where):
 
 #%% main evaluations
 
-import random
-random.seed(24)
-
 c = 0
 counter = 0
 k = []
@@ -253,7 +256,7 @@ positions = {}
 rank_info = {}
 
 batch = -1
-start = 0
+start = int(input('Provide the index of the dataset that you want to start. Press 0 for examining all the dataset  .. '))
 
 
 mode = int(input('\n#####\nWhich mode do you want to apply:  \n1. All known labels are provided \n2. 70% of the known labels are provided \n3. 70% of the known labels are provided and noisy labels are added in the place of the missing ones  \n4. MTI tool''s predictions (existing state-of-the-art approach) \n\n Your choice ...  '))
@@ -262,9 +265,9 @@ print('\n#####\n')
       
 if mode == 3:
     
-    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking_shuffled_70percent_plus_noise.pickle'
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_ranking_shuffled_70percent_plus_noise.pickle'
     
-    with open("noisy_labels_70percent.pickle", "rb") as f:
+    with open("noisy_labels_70percent_random_seed_" + rand + ".pickle", "rb") as f:
                 noisy_dict = pickle.load(f)
     f.close()
 
@@ -290,7 +293,7 @@ if mode == 3:
                 
 elif mode == 2:
             
-    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking_shuffled_70percent.pickle'
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_ranking_shuffled_70percent.pickle'
 
     for pos in range(0, len(known_y)):
     
@@ -301,14 +304,15 @@ elif mode == 2:
 
 elif mode == 1:
     
-    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'ranking.pickle'
+    arg = 'label_dependence_results_top100labels_' + scenario + '_mode_ranking.pickle'
 
                
 elif mode == 4:
     
-        arg = 'label_dependence_results_top100labels_' + scenario + '_mode_' + 'MTI_ranking.pickle'
+        arg = 'label_dependence_results_top100labels_' + scenario + '_mode_MTI_ranking.pickle'
         
-        z = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI\mti_predictions.pickle'
+        z = '/home/stkarlos/Instance-Based-ZSL/MTI/mti_predictions.pickle'#... #define the path for pre-computed files  
+
 
         with open(z, "rb") as f:
             			y_mti = pickle.load(f)
@@ -319,6 +323,15 @@ elif mode == 4:
 else:
     raise SystemExit('Wrong input')
 
+cmode = 0
+for i in known_y:
+    cmode += len(i)
+print('Number of actual predictions for the total test set: ', cmode)
+
+with open('known_y_mode' + str(mode) + '_random_seed_' + rand + '.pickle', 'wb') as handle:
+    pickle.dump(known_y, handle)                
+handle.close()
+#raise SystemExit('Save and close')
 
 #%% we have saved into pickle the similarity scores of the top-100 novel labels and all the existing labels
 #   per case for accelerting the reproduction of experiments
@@ -345,7 +358,7 @@ print('\n#####\n')
 for n in range(start, end):
     
     if n % 100 == 0:
-        print('******', n, 'with ', c, 'yes')
+        print('******', n)
     
     #for small tests break early
     #if n == 100:

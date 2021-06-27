@@ -14,6 +14,7 @@ import numpy as np
 # provide the path that contains the supervised predictions from the git repo
 path = '..\Instance-Based-ZSL\Supervised predictions'
 os.chdir(path)
+#%%
 
 choice = input('Give your choice regarding the set of predicted existing labels that you want to evaluate: \nmode1. Ground truth \nmode2. 70% of the ground truth without noisy labels (does not appear in the original work) \nmode3. 70% of the ground truth with 30% random noisy labels \nmode4. MTI-tool predictions (state-of-the-art approach) \nmode5. User defined predictions \n\n ...')
 
@@ -122,13 +123,15 @@ y_pred_binarized = mlb.transform(y_preds)
 print(classification_report(y_true_binarized, y_pred_binarized))
 
 # these results regard the MTI scenario (mode4)
+
+#                precision    recall  f1-score  support
 #   micro avg       0.63      0.58      0.60    569994
 #   macro avg       0.59      0.61      0.56    569994
 #weighted avg       0.67      0.58      0.58    569994
 # samples avg       0.63      0.59      0.59    569994
 
 
-
+#-------> useful for individual stats per label <-------- 
 # for specific labels or for all the existing ones
 
 #print(classification_report(y_true_binarized, y_pred_binarized, 

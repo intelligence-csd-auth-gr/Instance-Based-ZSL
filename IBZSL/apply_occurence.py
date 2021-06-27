@@ -62,12 +62,7 @@ empty_pos = positions_with_empty_known_labels(path)
 
 
 # w-LSSc(max) --> combined with the label_occurence it leads to IBZSL(max) ** this is the proposed one
-which = 'label_dependence_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle'
-kind = 'max'
-
-# w-LSSc(sum) --> combined with the label_occurence it leads to IBZSL(sum) ** this appears into the manuscript as a competitor (different variant for weighting with the sentences)
-#which = 'label_dependence_sum_weighted_bioBERT_44k_decisions_scores_mode_ranking.pickle
-#kind = 'sum'
+which = 'label_dependence_SW_weighted_max_bioBERT_44k_decisions_scores_mode_ranking.pickle'
 
 ###############################################################################
 with open(which, "rb") as f:
@@ -106,7 +101,6 @@ if makeplot:
 
 
 # save the vector with the ranked decisions having also applied the label occurence stage
-filename = which.split('weighted_')[0] + 'weighted_' + kind + '_' + which.split('weighted_')[1]
-with open(filename ,  'wb') as handle:
+with open('occurence_modified_' + which ,  'wb') as handle:
      pickle.dump(yy, handle)                
 handle.close()

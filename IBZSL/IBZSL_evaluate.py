@@ -100,7 +100,7 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
 #[50, 100)     2692
 
 # give the path of the appropriate folder into 'Results' following the structure of the current repo: ideal oracle - imperfect oracle - realistic oracle (MTI)
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\imperfect oracle\seed24' 
+path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\ideal oracle' 
 os.chdir(path)
 #%%
 files = os.listdir(os.getcwd())
@@ -128,7 +128,7 @@ for pos,file in enumerate(files):
     k, k_list = coverage_custom(y_test, y_preds)
     one_rank  = one_rank_custom(y_test, y_preds)
     
-    if   ('weighted' not in file) and ('occurence' not in file):
+    if   ('unweighted' in file):
          method = approach[0]
     elif ('weighted' in file)     and ('occurence' not in file):
          method = approach[1]
