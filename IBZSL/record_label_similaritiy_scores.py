@@ -311,7 +311,7 @@ elif mode == 4:
     
         arg = 'label_dependence_results_top100labels_' + scenario + '_mode_MTI_ranking.pickle'
         
-        z = '/home/stkarlos/Instance-Based-ZSL/MTI/mti_predictions.pickle'#... #define the path for pre-computed files  
+        z = '../Instance-Based-ZSL/MTI/mti_predictions.pickle' #... #define the path for pre-computed files  
 
 
         with open(z, "rb") as f:
@@ -328,10 +328,15 @@ for i in known_y:
     cmode += len(i)
 print('Number of actual predictions for the total test set: ', cmode)
 
-with open('known_y_mode' + str(mode) + '_random_seed_' + rand + '.pickle', 'wb') as handle:
+if mode == 3:
+    _ = 'known_y_mode' + str(mode) + '_random_seed_' + rand + '.pickle'
+else:
+    _ = 'known_y_mode' + str(mode) + '.pickle'
+
+with open(_, 'wb') as handle:
     pickle.dump(known_y, handle)                
 handle.close()
-#raise SystemExit('Save and close')
+#raise SystemExit('Save and close') # for early stop
 
 #%% we have saved into pickle the similarity scores of the top-100 novel labels and all the existing labels
 #   per case for accelerting the reproduction of experiments

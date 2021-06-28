@@ -12,6 +12,7 @@ import os, pickle
 import numpy as np
 
 # provide the path that contains the supervised predictions from the git repo
+
 path = '..\Instance-Based-ZSL\Supervised predictions'
 os.chdir(path)
 #%%
@@ -90,7 +91,7 @@ print('Some useful stats regarding the selected predictions for our examined dat
 print('#############')
         
 # load the actual labels
-os.chdir(r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files')
+os.chdir('..\Instance-Based-ZSL\pre-computed files')
 z = 'known_labels.pickle'
 
 with open(z, "rb") as f:
