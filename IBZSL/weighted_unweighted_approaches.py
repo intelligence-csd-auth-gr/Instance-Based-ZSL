@@ -12,7 +12,7 @@ import os, pickle
 #path = ... #define the path for pre-computed files  
 #os.chdir(path)
 
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
+path = r'..\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
 #%% load values with max or other selected function per instance and label    
 
@@ -28,7 +28,7 @@ for line in file:
     labels.append(line[:-1])
 
 #%% we load the file that is created from the record_label_similaritiy_scores.py
-    
+os.chdir(r'D:\datasets')
 ###### these are the files that are evaluated into the original work for mode1 (ideal oracle) #########
 
 # unweighted version (LSSc with max label similarity) -> you can add the rest file names into the two next lists
@@ -72,10 +72,6 @@ else:
 
 files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_total.pickle']
 approaches = ['label_dependence_SW_weighted_' + kind_str + '_bioBERT_44k_decisions_scores_mode_ranking.pickle']
-
-#os.chdir(r'D:\datasets\mode2')
-#files = ['label_dependence_results_top100labels_pureZSL_mode_ranking_shuffled_70percent.pickle']
-#approaches = ['label_dependence_weighted_' + kind_str + '_bioBERT_44k_decisions_scores_mode_ranking_shuffled_70percent.pickle']
 
 
 for pos,f in enumerate(files):

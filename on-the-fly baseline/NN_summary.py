@@ -42,7 +42,7 @@ def sort_similarities(d, labels):
             best_3_scores.append(['None'])
         else:
             s = sorted(range(len(k)), key=lambda pos: k[pos])
-            s.reverse()
+            s.reverse() # we want the closest distance
             decisions.append(np.array(labels)[s])
             best_3_scores.append(np.array(k)[s][0:3])  # hold the 3 best values for profiling reasons, it is not used into the proposed pipeline. 
 

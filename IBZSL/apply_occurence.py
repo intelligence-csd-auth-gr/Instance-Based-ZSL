@@ -26,7 +26,7 @@ def positions_with_empty_known_labels():
     return empty_known_labls
 
 ##############################################################################
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files' #define the path for pre-computed files
+path = r'..\Instance-Based-ZSL\pre-computed files' #define the path for pre-computed files
 os.chdir(path)
 
 # load the predictions from the label occurence heuristic
@@ -52,7 +52,7 @@ for i in y_occ:
         where.append(c)
         
 # we compute the positions where the known labels are empty
-empty_pos = positions_with_empty_known_labels(path)
+empty_pos = positions_with_empty_known_labels()
 
 ##############################################################################
 # here we load the vector with predictions as it is exported per evaluated mode from the file weighted_unweighted_approaches.py
@@ -60,9 +60,9 @@ empty_pos = positions_with_empty_known_labels(path)
 
 ###### these are the files that are evaluated into the original work for mode1 (ideal oracle) #########
 
-
+os.chdir(r'D:\datasets')
 # w-LSSc(max) --> combined with the label_occurence it leads to IBZSL(max) ** this is the proposed one
-which = 'label_dependence_SW_weighted_max_bioBERT_44k_decisions_scores_mode_ranking.pickle'
+which = ...#'label_dependence_SW_weighted_max_bioBERT_44k_decisions_scores_mode_ranking.pickle'
 
 ###############################################################################
 with open(which, "rb") as f:

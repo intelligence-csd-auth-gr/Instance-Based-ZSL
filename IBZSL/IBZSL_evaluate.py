@@ -100,7 +100,7 @@ def remove_instances_with_empty_known_labels(y_test, y_preds, current_path):
 #[50, 100)     2692
 
 # give the path of the appropriate folder into 'Results' following the structure of the current repo: ideal oracle - imperfect oracle - realistic oracle (MTI)
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\Results\realistic oracle (MTI)' 
+path = r'..\Instance-Based-ZSL\Results\realistic oracle (MTI)' 
 os.chdir(path)
 #%%
 files = os.listdir(os.getcwd())
