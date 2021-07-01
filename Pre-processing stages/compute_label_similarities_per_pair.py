@@ -2,11 +2,28 @@ import pickle
 import numpy as np
 import pandas as pd
 import os
+
 import tensorflow as tf
 from biobert_embedding import downloader
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM    
 import torch
 import logging
+
+import contextlib, time
+
+@contextlib.contextmanager
+def timer():
+    """Time the execution of a context block.
+
+    Yields:
+        None
+    """
+    start = time.time()
+    # Send control back to the context block
+    yield
+    end = time.time()
+    print('Elapsed: {:.2f}s'.format(end - start))
+
 
 logging.basicConfig(filename='app.log', filemode='w',format='%(asctime)s %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -176,6 +193,8 @@ def label_embeddings(asked_labels):
 				c2 += 1
 			d[label] = label_array
 	print(c1,c2)
+	
+	return d
             
 
 def label_pair(novel_labels_embeddings, existing_labels_embeddings):
@@ -195,7 +214,7 @@ def label_pair(novel_labels_embeddings, existing_labels_embeddings):
                   
 #%% main code
 
-path = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
+path = r'..\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
 
 choice = int(input('How many labels you want? \n1: 100 labels \n2: user defined labels (add .txt file into source path) \n\n Your choice ...  '))
@@ -214,7 +233,7 @@ choice = int(input('Compute similarities of each novel label with: \n1: actual l
 
 if choice == 1:
     
-        _ = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files\known_labels.pickle'
+        _ = r'..\Instance-Based-ZSL\pre-computed files\known_labels.pickle'
         with open(_, "rb") as f:
             			supervised_predictions = pickle.load(f)
         f.close()
@@ -222,7 +241,7 @@ if choice == 1:
 
 elif choice == 2:
         
-        _ = r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI\mti_predictions.pickle'
+        _ = r'..\Instance-Based-ZSL\MTI\mti_predictions.pickle'
         with open(_, "rb") as f:
             			supervised_predictions = pickle.load(f)
         f.close()
@@ -245,9 +264,10 @@ for i in supervised_predictions:
 existing_labels_set = list(set(l))
 print('There are %d separate labels which appear %d times in total into the available %d test instances' %(len(existing_labels_set), counter, len(supervised_predictions)) )
     
-novel_labels_embeddings = label_embeddings(novel_labels)
-existing_labels_embeddings = label_embeddings(existing_labels_set)
-d = label_pair(novel_labels_embeddings, existing_labels_embeddings)
+with timer():
+	novel_labels_embeddings = label_embeddings(novel_labels)
+	existing_labels_embeddings = label_embeddings(existing_labels_set)
+	d = label_pair(novel_labels_embeddings, existing_labels_embeddings)
 
 with open('novel_labels_embeddings.pickle', 'wb') as handle:
     pickle.dump(novel_labels_embeddings, handle)                

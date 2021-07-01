@@ -9,8 +9,7 @@ Grigorios Tsoumakas greg@csd.auth.gr
 """
 
 import os, pickle
-#path = ... #define the path for pre-computed files  
-#os.chdir(path)
+
 
 path = r'..\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 os.chdir(path)
@@ -28,7 +27,7 @@ for line in file:
     labels.append(line[:-1])
 
 #%% we load the file that is created from the record_label_similaritiy_scores.py
-os.chdir(r'D:\datasets')
+os.chdir(r'..')
 ###### these are the files that are evaluated into the original work for mode1 (ideal oracle) #########
 
 # unweighted version (LSSc with max label similarity) -> you can add the rest file names into the two next lists

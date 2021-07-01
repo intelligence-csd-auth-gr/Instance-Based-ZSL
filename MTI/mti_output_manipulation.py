@@ -21,7 +21,6 @@ def mti_to_list(line):
 
 # provide the path that contains the mti_output.out
 #os.chdir('..Instance-Based-ZSL\MTI')
-os.chdir(r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI')
 filepath = 'mti_output.out'
 
 ####################################################################################
@@ -64,8 +63,7 @@ print('Number of predictions for our examined dataset: \n\nInstances: %d\tAmount
     
 #%% remove the novel labels from the predictions whever they appear
 
-#path = '/home/stkarlos/Instance-Based-ZSL/pre-computed files'#... #define the path for pre-computed files  
-os.chdir(r'C:\Users\stam\Documents\git\Instance-Based-ZSL\pre-computed files')
+#path = r''..\Instance-Based-ZSL\pre-computed files'#... #define the path for pre-computed files  
 file = open("top_100_labels.txt")
 labels=list()
 for line in file:
@@ -90,7 +88,7 @@ print('Number of predictions for our examined dataset: \n\nInstances: %d\tAmount
     
 #%%
 import pickle
-os.chdir(r'C:\Users\stam\Documents\git\Instance-Based-ZSL\MTI')
+os.chdir(r'..\Instance-Based-ZSL\MTI')
 
 # for storing the predictions into a .pickle file
 with open('mti_predictions.pickle', 'wb') as handle:

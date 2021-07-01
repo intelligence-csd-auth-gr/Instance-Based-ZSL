@@ -54,6 +54,7 @@ for i in y_occ:
 # we compute the positions where the known labels are empty
 empty_pos = positions_with_empty_known_labels()
 
+
 ##############################################################################
 # here we load the vector with predictions as it is exported per evaluated mode from the file weighted_unweighted_approaches.py
 
@@ -72,6 +73,7 @@ f.close()
 
 yy = label_dependence
 all_pos = []
+
 for i in range(0, len(y_occ)):
     
     if i in where or i in empty_pos:

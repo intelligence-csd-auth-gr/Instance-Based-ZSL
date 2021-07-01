@@ -11,8 +11,8 @@ Grigorios Tsoumakas greg@csd.auth.gr
 import os, pickle
 import numpy as np
 
-# provide the path that contains the supervised predictions from the git repo
 
+# provide the path that contains the supervised predictions from the git repo
 path = '..\Instance-Based-ZSL\Supervised predictions'
 os.chdir(path)
 #%%
