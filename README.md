@@ -105,9 +105,11 @@ We describe the necessary files that need to be executed for producing the offic
 
 We have exploited the online tool of MTI ([Medical Text Indexer by National Library of Medicine](https://ii.nlm.nih.gov/MTI/)) for obtaining realistic predictions. Thus, we have the chance of applying our proposed algorithm based on a widely accepted tool that exports supervised predictions for the seen labels.
 
-- **mti_output.out** 🠊 predictions of MTI tool for the examined test set
+- **mti_output.out** 🠊 predictions of MTI tool for the examined test set, as it is exported from the official site of this tool 
 
 - **mti_output_manipulation.py** 🠊 this script runs a series of commands for transforming the output of the MTI tool to a proper list structure for our evaluations. Its output is stored into the **mti_predictions.pickle** file, which is further exploited  by our main pipeline for obtaining the performance of the proposed algorithm under a set of realistic decisions for the seen labels.
+
+- **mti_predictions.pickle** 🠊 predictions of MTI tool for the examined test set in a compatible format
 
 
 ## IBZSL (the proposed algorith)
@@ -124,6 +126,8 @@ We have exploited the online tool of MTI ([Medical Text Indexer by National Libr
 
 - **IBZSL_evaluate.py** 🠊 the script through which the *Coverage* and the *1-error* metrics are computed for the proposed algorithm, as well as for the rest ones, apart for the NN_baselines, since these computations are computed into their corresponding files. Additionally, appropriate histograms and useful stats (frequency of correct predictions) are computed here, which are not recorded into the manuscript due to lack of space.
 
+- **bioBERT.py** 🠊 the file for computing the bioBERT embeddings.
+
 
 ### Supervised predictions
 
@@ -131,13 +135,17 @@ This folder contains the supervised predictions of each examined mode. For mode3
 
 - **evaluate_modes.py** 🠊 we provide here the code for evaluating the supervised performance of each mode regarding the seen labels.
 
+### artificial predictions (mode3)
+
+This folder contains the files that regard the three different random seeds that were selected for running mode3 three times.
 
 ### Results
 
 Here are added the finally produced .pickle files which facilitate the reproducibility of the results reported in Table 1 of the manuscript.
 
-- **ideal oracle** and **imperfect oracle** 🠊 exploited under the **IBZSL_evaluate.py**
+- **ideal oracle**, **imperfect oracle**, and **realistic oracle (MTI)** 🠊 exploited under the **IBZSL_evaluate.py**
 - **baselines** 🠊 exploited under the **NN_bioBERT_evaluate.py** (first unzip the existing *.7z* files)
+- **hybrid oracle (mode2)** 🠊 a random 70% partition of the ground truth predictions are provided without any noise injection (not included in the original paper)
 
 
 ## Requirements/Dependencies
